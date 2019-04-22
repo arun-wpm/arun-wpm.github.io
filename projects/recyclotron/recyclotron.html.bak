@@ -3,10 +3,6 @@
 		<link rel="stylesheet" type="text/css" href="rayaburong.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 		<style>
-			body {
-				font-family: 'Montserrat', sans-serif;
-				font-size: 30px;
-			}
 			img {
 				width: 100%;
 				height: auto;
@@ -17,11 +13,14 @@
 	<body>
 		<img href="Recyclotron photo 512.png">
 		<img href="cover temp.jpg">
-		<h1>Recyclotron</h1>
-		<h2>Application in development, website also in development</h2>
+		<div align="center">
+			<h1>Recyclotron</h1>
+			<h2>Application in development, website also in development</h2>
+		</div>
 		<p>Privacy Policy</p>
 		<p>
 			<br>Camera permission</br>
 			This app requires the usage of the phone's camera in order to scan the QR code given to the user by the physical Recyclotron machine. Once the QR code is scanned, it will bring the user to the main page to notify the user the types of recyclable they have put in. The extent to which the camera is used is only for the QR code, and nothing else.
+		</p>
 	</body>
 </html>
