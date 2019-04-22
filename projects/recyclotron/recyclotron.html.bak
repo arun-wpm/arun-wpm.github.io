@@ -1,5 +1,21 @@
 <html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="rayaburong.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+		<style>
+			body {
+				font-family: 'Montserrat', sans-serif;
+				font-size: 30px;
+			}
+			img {
+				width: 100%;
+				height: auto;
+			}
+		</style>
+		<title>Projects: Recyclotron</title>
+	</head>
 	<body>
+		<img href="Recyclotron photo 512.png">
 		<h1>Recyclotron</h1>
 		<h2>Application in development, website also in development</h2>
 		<p>Privacy Policy</p>
