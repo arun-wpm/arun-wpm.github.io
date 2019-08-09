@@ -1,22 +1,23 @@
 <HTML>
 	<script>
-		var goUp = 0;
-		window.onscroll = function()
+		var num = 1;
+		function cycle()
 		{
-			setIntroWidth();
-			if (goUp == 1)
+			document.getElementById("intro").src= "images/intro/" + num + ".jpg";
+			num++;
+			if (num > 5)
 			{
-				sendUp();
+				num = 1;
 			}
-		};
+			setTimeout(cycle, 1000);
+		}
 		function sendUp()
 		{
-			goUp = 1;
-			window.scrollBy(0, -50);
+			window.scrollBy(0, -10);
 			var pos = document.body.scrollTop;
-			if (pos == 0)
+			if (pos > 0)
 			{
-				goUp = 0;
+				setTimeout(sendUp, 1);
 			}
 		}
 		function scrollToCat(element)
@@ -27,6 +28,7 @@
 			document.getElementById("body3").style.visibility = "collapse";
 			document.getElementById("body4").style.visibility = "collapse";
 			element.style.visibility = "visible";
+			element.style.height = document.body.clientHeight;
 			window.scrollBy(0,element.offsetTop - pos);
 		}
 		function setIntroWidth()
@@ -85,14 +87,16 @@
 				grid-column: 4;
 				grid-row: 1;
 			}
+
 		</style>
 		<title>arun.</title>
 	</head>
-	<body bgcolor="#b2bec3" onload="setIntroWidth()">
+	<body bgcolor="#b2bec3" onload="setIntroWidth();cycle()">
 		<div align="center" width="100%" id="arun">
 			<h1>arun.</h1>
 		</div>
-		<div width="100%" style="background-color:#2d3436" id="intro">
+		<div style="background-color:#2d3436">
+			<img width="100%" style="object-fit:cover" id="intro" />
 		</div>
 		<div class="grid" align="center" width="100%" id="menu">
 			<div class="menu1" style="background-color:#dfe6e9" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="scrollToCat(document.getElementById('body1'))" id="cat1">
