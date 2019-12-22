@@ -43,12 +43,21 @@
 		}
 		function unhighlight(element)
 		{
-			element.style.backgroundColor = "#dfe6e9";
+			element.style.backgroundColor = "";
+		}
+		function handledisplay(name) {
+			if (document.getElementById(name).hidden == true)
+			{
+				document.getElementById(name).hidden = false;
+			}
+			else
+			{
+				document.getElementById(name).hidden = true;
+			}
 		}
 	</script>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" type="text/css" href="rayaburong.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -73,6 +82,10 @@
 			.index-item {
 				padding-top: 30px;
 				padding-bottom: 30px;
+			}
+			.restricted-list {
+				max-width: 600px;
+				max-height: 400px;
 			}
 			.grid {
 				display: grid;
@@ -173,27 +186,44 @@
 			<div style="background-color:#a29bfe" id="body4">
 				<div class="index-item">
 					<h2 align="center">Blog</h2>
-					<p align="center"><i>~ 2019 Year In Review ~</i></p>
-					<p align="center">+ The Winter Term +</p>
-					<p align="center">+ The Spring Break +</p>
-					<p align="center">+ The Spring Term +</p>
-					<p align="center">+ The Brewster Summer Program +</p>
-					<a href="blog/2019/the-england-trip.html" style="text-align:center;display:block">+ [002] 12/19: The England Trip +</a>
-					<p align="center">+ The Summer +</p>
-					<a href="blog/2019/the-arrival.html" style="text-align:center;display:block">+ [003] 12/21: The Arrival +</a>
-					<p align="center">+ The Fall Break +</p>
-					<a href="blog/2019/the-fall-classes.html" style="text-align:center;display:block">+ [001] 12/18: The Fall Classes +</a>
-					<p align="center">+ The Extracurriculars +</p>
-					<p align="center">+ The Social Scene +</p>
-					<p align="center">+ The City +</p>
-					<p align="center">+ The UROP +</p>
-					<p align="center">+ The Miscellaneous +</p>
-					<p align="center">+ The Year +</p>
+					<p align="center" onclick="handledisplay(2019)" onmouseover="highlight(this)" onmouseout="unhighlight(this)"><i>~ 2019 Year In Review ~</i></p>
+					<div id="2019" align="center" style="padding: 30px" hidden>
+						<div class="card restricted-list overflow-auto">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item"><p>+ The Winter Term +</p></li>
+								<li class="list-group-item"><p>+ The Spring Break +</p></li>
+								<li class="list-group-item"><p>+ The Spring Term +</p></li>
+								<li class="list-group-item"><p>+ The Brewster Summer Program +</p></li>
+								<li class="list-group-item"><a href="blog/2019/the-england-trip.html">+ [002] 12/19: The England Trip +</a></li>
+								<li class="list-group-item"><p>+ The Summer +</p></li>
+								<li class="list-group-item"><a href="blog/2019/the-arrival.html">+ [003] 12/21: The Arrival +</a></li>
+								<li class="list-group-item"><p>+ The Fall Break +</p></li>
+								<li class="list-group-item"><a href="blog/2019/the-fall-classes.html">+ [001] 12/18: The Fall Classes +</a></li>
+								<li class="list-group-item"><p>+ The Extracurriculars +</p></li>
+								<li class="list-group-item"><p>+ The Social Scene +</p></li>
+								<li class="list-group-item"><p>+ The City +</p></li>
+								<li class="list-group-item"><p>+ The UROP +</p></li>
+								<li class="list-group-item"><p>+ The Miscellaneous +</p></li>
+								<li class="list-group-item"><p>+ The Year +</p></li>
+							</ul>
+						</div>
+					</div>
+
+					<p align="center"><i>~ Handmade Data Is Beautiful ~</i></p>
+					<p align="center"><i>~ Language Bites ~</i></p>
+					<p align="center"><i>~ YouTube Adventures ~</i></p>
+					<p align="center"><i>~ Random Thoughts ~</i></p>
 				</div>
 			</div>
 			<div style="background-color:#ff7675" id="body5">
 				<div class="index-item">
 					<h2 align="center">Contact</h2>
+					<p align="center"><b>Arun Wongprommoon</b></p>
+					<p align="center"><i>Bangkok, Thailand</i></p>
+					<p align="center">currently in <i>Cambridge, Massachusetts, US</i></p>
+					<p align="center" style="font-size: 16px">AlphaRomeoUniformNovemberWhiskeyPapaMike (at) MIT (dot) EDU</p>
+					<p align="center" style="font-size: 16px">github: rayaburong</p>
+					<p align="center" style="font-size: 16px">social media can be searched using real name</p>
 				</div>
 			</div>
 		</table>
