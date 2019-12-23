@@ -58,14 +58,15 @@
 	</script>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="rayaburong.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="rayaburong.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style>
 			h1 {
 				font-family: 'Montserrat', sans-serif;
 				font-size: 72px;
+				font-weight: bold;
 			}
 			h2 {
 				font-family: 'Montserrat', sans-serif;
@@ -86,6 +87,9 @@
 			.restricted-list {
 				max-width: 600px;
 				max-height: 400px;
+			}
+			.washout {
+				color: #555555;
 			}
 			.grid {
 				display: grid;
@@ -109,11 +113,13 @@
 				grid-column: 4;
 				grid-row: 1;
 			}
-
+			body {
+				background: #eeeeee !important;
+			}
 		</style>
 		<title>arun.</title>
 	</head>
-	<body bgcolor="#b2bec3" onload="cycle()">
+	<body onload="cycle()">
 		<div align="center" width="100%" id="arun">
 			<h1>arun.</h1>
 			<p>website under construction... stay put!</p>
@@ -141,9 +147,11 @@
 			<div style="background-color:#74b9ff" id="body1">
 				<div class="index-item">
 					<h2 align="center">Profile</h2>
-					<p align="center">Education</p>
-					<p align="center">Awards</p>
-					<p align="center">Resume</p>
+					<div align="center" onmouseover="highlight(this)" onmouseout="unhighlight(this)">
+						<a href="profile/education.html"><p>Education</p></a>
+					</div>
+					<p align="center" class="washout">Awards</p>
+					<p align="center" class="washout">Resume</p>
 				</div>
 			</div>
 			<div style="background-color:#55efc4" id="body2">
@@ -151,25 +159,25 @@
 					<h2 align="center">Projects</h2>
 					<div class="card-deck" style="padding: 30px">
 						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center">MWITS Chemical Database App</p>
+							<p align="center" class="washout">MWITS Chemical Database App</p>
 						</div>
 						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center">Ambient Detector</p>
+							<p align="center" class="washout">Ambient Detector</p>
 						</div>
 						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center">Exeter Dining Hall App</p>
+							<p align="center" class="washout">Exeter Dining Hall App</p>
 						</div>
 						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center">Recyclotron</p>
+							<p align="center" class="washout">Recyclotron</p>
 						</div>
 						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center">CS999: Experimental Research</p>
+							<p align="center" class="washout">CS999: Experimental Research</p>
 						</div>
 						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center">HackMIT: LectHub</p>
+							<p align="center" class="washout">HackMIT: LectHub</p>
 						</div>
 						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center">21M.080: Low Resolution Spectral Modelling Synthesis</p>
+							<p align="center" class="washout">21M.080: Low Resolution Spectral Modelling Synthesis</p>
 						</div>
 					</div>
 				</div>
@@ -177,10 +185,10 @@
 			<div style="background-color:#ffeaa7" id="body3">
 				<div class="index-item">
 					<h2 align="center">Gallery</h2>
-					<p align="center">< 2017</p>
-					<p align="center">2017</p>
-					<p align="center">2018</p>
-					<p align="center">2019</p>
+					<p align="center" class="washout">< 2017</p>
+					<p align="center" class="washout">2017</p>
+					<p align="center" class="washout">2018</p>
+					<p align="center" class="washout">2019</p>
 				</div>
 			</div>
 			<div style="background-color:#a29bfe" id="body4">
@@ -209,10 +217,10 @@
 						</div>
 					</div>
 
-					<p align="center"><i>~ Handmade Data Is Beautiful ~</i></p>
-					<p align="center"><i>~ Language Bites ~</i></p>
-					<p align="center"><i>~ YouTube Adventures ~</i></p>
-					<p align="center"><i>~ Random Thoughts ~</i></p>
+					<p align="center" class="washout"><i>~ Handmade Data Is Beautiful ~</i></p>
+					<p align="center" class="washout"><i>~ Language Bites ~</i></p>
+					<p align="center" class="washout"><i>~ YouTube Adventures ~</i></p>
+					<p align="center" class="washout"><i>~ Random Thoughts ~</i></p>
 				</div>
 			</div>
 			<div style="background-color:#ff7675" id="body5">
