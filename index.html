@@ -12,38 +12,13 @@
 			}
 			setTimeout(cycle, 1000);
 		}
-		function sendUp()
-		{
-			window.scrollBy(0, -10);
-			var pos = document.body.scrollTop;
-			if (pos > 0)
-			{
-				setTimeout(sendUp, 1);
-			}
-		}
-		function scrollToCat(element)
-		{
-			var pos = document.body.scrollTop;
-			document.getElementById("body1").style.visibility = "collapse";
-			document.getElementById("body2").style.visibility = "collapse";
-			document.getElementById("body3").style.visibility = "collapse";
-			document.getElementById("body4").style.visibility = "collapse";
-			element.style.visibility = "visible";
-			element.style.height = document.body.clientHeight;
-			window.scrollBy(0,element.offsetTop - pos);
-		}
-		function setIntroWidth()
-		{
-			var introHeight = document.body.clientHeight - document.getElementById("arun").offsetHeight - document.getElementById("menu").offsetHeight - 50;
-			document.getElementById("intro").style.height = introHeight;
-		}
 		function highlight(element)
 		{
-			element.style.backgroundColor = "#fdcb6e";
+			element.classList.add("u-orange-back");
 		}
 		function unhighlight(element)
 		{
-			element.style.backgroundColor = "";
+			element.classList.remove("u-orange-back");
 		}
 		function handledisplay(name) {
 			if (document.getElementById(name).hidden == true)
@@ -62,189 +37,145 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="rayaburong.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<style>
-			h1 {
-				font-family: 'Montserrat', sans-serif;
-				font-size: 72px;
-				font-weight: bold;
-			}
-			h2 {
-				font-family: 'Montserrat', sans-serif;
-				font-size: 48px;
-			}
-			p {
-				font-family: 'Montserrat', sans-serif;
-				font-size: 24px;
-			}
-			div {
-				font-family: 'Montserrat', sans-serif;
-				font-size: 24px;
-			}
-			.index-item {
-				padding-top: 30px;
-				padding-bottom: 30px;
-			}
-			.restricted-list {
-				max-width: 600px;
-			}
-			.washout {
-				color: #555555;
-			}
-			.grid {
-				display: grid;
-				grid-auto-columns: 1fr;
-				grid-gap: 10px;
-				grid-auto-rows: minmax(30px, auto);
-			}
-			.menu1 {
-				grid-column: 1;
-				grid-row: 1;
-			}
-			.menu2 {
-				grid-column: 2;
-				grid-row: 1;
-			}
-			.menu3 {
-				grid-column: 3;
-				grid-row: 1;
-			}
-			.menu4 {
-				grid-column: 4;
-				grid-row: 1;
-			}
-			body {
-				background: #eeeeee !important;
-			}
-		</style>
 		<title>arun.</title>
 	</head>
-	<body onload="cycle()">
-		<div align="center" width="100%" id="arun">
-			<h1>arun.</h1>
-			<p>website under construction... stay put!</p>
-		</div>
-		<div style="background-color:#2d3436">
-			<img width="100%" style="object-fit:cover" id="intro" />
-		</div>
-		<!--
-		<div class="grid" align="center" width="100%" id="menu">
-			<div class="menu1" style="background-color:#dfe6e9" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="scrollToCat(document.getElementById('body1'))" id="cat1">
-				Profile
+	<body class="row u-no-margin u-dark-text" onload="cycle()">
+		<div class="col"></div>
+		<div class="col" style="min-width: 1000px;">
+			<div align="center" width="100%" id="arun">
+				<h1>arun.</h1>
+				<p>website under construction... stay put!</p>
 			</div>
-			<div class="menu2" style="background-color:#dfe6e9" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="scrollToCat(document.getElementById('body2'))" id="cat2">
-				Projects
+			<div align="center" class="u-dark-back">
+				<img width="100%" class="u-restricted-width u-center" style="object-fit:cover" id="intro" />
 			</div>
-			<div class="menu3" style="background-color:#dfe6e9" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="scrollToCat(document.getElementById('body3'))" id="cat3">
-				Gallery
-			</div>
-			<div class="menu4" style="background-color:#dfe6e9" onmouseover="highlight(this)" onmouseout="unhighlight(this)" onclick="scrollToCat(document.getElementById('body4'))" id="cat4">
-				Contact
-			</div>
-		</div>
-		-->
-		<table align="center" width="100%">
-			<div style="background-color:#74b9ff" id="body1">
-				<div class="index-item">
-					<h2 align="center">Profile</h2>
-					<div align="center" onmouseover="highlight(this)" onmouseout="unhighlight(this)">
-						<a href="profile/education.html"><p>Education</p></a>
-					</div>
-					<p align="center" class="washout">Awards</p>
-					<p align="center" class="washout">Resume</p>
-				</div>
-			</div>
-			<div style="background-color:#55efc4" id="body2">
-				<div class="index-item">
-					<h2 align="center">Projects</h2>
-					<div class="card-deck" style="padding: 30px">
-						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center" class="washout">MWITS Chemical Database App</p>
+			<table align="center" width="100%">
+				<div class="u-egg-back" id="body1">
+					<div class="u-index-item">
+						<h2 align="center">Profile</h2>
+						<div align="center" onmouseover="highlight(this)" onmouseout="unhighlight(this)">
+							<a href="profile/education.html"><p>Education</p></a>
 						</div>
-						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center" class="washout">Ambient Detector</p>
-						</div>
-						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center" class="washout">Exeter Dining Hall App</p>
-						</div>
-						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center" class="washout">Recyclotron</p>
-						</div>
-						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center" class="washout">CS999: Experimental Research</p>
-						</div>
-						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center" class="washout">HackMIT: LectHub</p>
-						</div>
-						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center" class="washout">21M.080: Low Resolution Spectral Modelling Synthesis</p>
-						</div>
-						<div class="card bg-light mb-3" style="min-width: 25%">
-							<p align="center" class="washout">web.lab: JourNext</p>
-						</div>
+						<p align="center" class="u-gray-text">Awards</p>
+						<p align="center" class="u-gray-text">Resume</p>
 					</div>
 				</div>
-			</div>
-			<div style="background-color:#ffeaa7" id="body3">
-				<div class="index-item">
-					<h2 align="center">Gallery</h2>
-					<p align="center" class="washout">< 2017</p>
-					<p align="center" class="washout">2017</p>
-					<p align="center" class="washout">2018</p>
-					<p align="center" class="washout">2019</p>
-					<p align="center" class="washout">2020</p>
-				</div>
-			</div>
-			<div style="background-color:#a29bfe" id="body4">
-				<div class="index-item">
-					<h2 align="center">Blog</h2>
-					<p style="color: #007bff" align="center" onclick="handledisplay(2019)" onmouseover="highlight(this)" onmouseout="unhighlight(this)"><i>~ 2019 Year In Review ~</i></p>
-					<div id="2019" align="center" style="padding: 30px" hidden>
-						<div class="card restricted-list overflow-auto">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item"><p>+ The Winter Term +</p></li>
-								<li class="list-group-item"><a href="blog/2019/the-spring-break.html">+ [004] 12/22: The Spring Break +</a></li>
-								<li class="list-group-item"><p>+ The Spring Term +</p></li>
-								<li class="list-group-item"><p>+ The Brewster Summer Program +</p></li>
-								<li class="list-group-item"><a href="blog/2019/the-england-trip.html">+ [002] 12/19: The England Trip +</a></li>
-								<li class="list-group-item"><p>+ The Summer +</p></li>
-								<li class="list-group-item"><a href="blog/2019/the-arrival.html">+ [003] 12/21: The Arrival +</a></li>
-								<li class="list-group-item"><p>+ The Fall Break +</p></li>
-								<li class="list-group-item"><a href="blog/2019/the-fall-classes.html">+ [001] 12/18: The Fall Classes +</a></li>
-								<li class="list-group-item"><a href="blog/2019/the-extracurriculars.html">+ [006] 12/25: The Extracurriculars +</a></li>
-								<li class="list-group-item"><p>+ The Social Scene +</p></li>
-								<li class="list-group-item"><p>+ The City +</p></li>
-								<li class="list-group-item"><a href="blog/2019/the-urop.html">+ [005] 12/24: The UROP +</a></li>
-								<li class="list-group-item"><p>+ The Miscellaneous +</p></li>
-								<li class="list-group-item"><p>+ The Year +</p></li>
-							</ul>
+				<div class="u-light-back" id="body2">
+					<div class="u-index-item">
+						<h2 align="center">Projects</h2>
+						<div align="center" class="row row-cols-1 row-cols-md-3 u-no-margin">
+							<div class="col mb-1">
+								<div class="card bg-light">
+									<p align="center" class="u-gray-text">MWITS Chemical Database App</p>
+									<img width="100px" height="100px" src="images/camera.jpg"/>
+								</div>
+							</div>
+							<div class="col mb-1">
+								<div class="card bg-light">
+									<p align="center" class="u-gray-text">Ambient Detector</p>
+									<img width="100px" height="100px" src="images/ambientdetector.png"/>
+								</div>
+							</div>
+							<div class="col mb-1">
+								<div class="card bg-light">
+									<p align="center" class="u-gray-text">Exeter Dining Hall App</p>
+									<img width="100px" height="100px" src="images/exeter.jpg"/>
+								</div>
+							</div>
+							<div class="col mb-1">
+								<div class="card bg-light">
+									<p align="center" class="u-gray-text">Recyclotron</p>
+									<img width="100px" height="100px" src="images/recyclotron.png"/>
+								</div>
+							</div>
+							<div class="col mb-1">
+								<div class="card bg-light">
+									<p align="center" class="u-gray-text">CS999: Experimental Research</p>
+									<img width="100px" height="100px" src="images/camera.jpg"/>
+								</div>
+							</div>
+							<div class="col mb-1">
+								<div class="card bg-light">
+									<p align="center" class="u-gray-text">HackMIT: LectHub</p>
+									<img width="100px" height="100px" src="images/camera.jpg"/>
+								</div>
+							</div>
+							<div class="col mb-1">
+								<div class="card bg-light">
+									<p align="center" class="u-gray-text">21M.080: Low Resolution Spectral Modelling Synthesis</p>
+									<img width="100px" height="100px" src="images/camera.jpg"/>
+								</div>
+							</div>
+							<div class="col mb-1">
+								<div class="card bg-light">
+									<p align="center" class="u-gray-text">web.lab: JourNext</p>
+									<img width="100px" height="100px" src="images/camera.jpg"/>
+								</div>
+							</div>
 						</div>
 					</div>
+				</div>
+				<div class="u-egg-back" id="body3">
+					<div class="u-index-item">
+						<h2 align="center">Gallery</h2>
+						<p align="center" class="u-gray-text">< 2017</p>
+						<p align="center" class="u-gray-text">2017</p>
+						<p align="center" class="u-gray-text">2018</p>
+						<p align="center" class="u-gray-text">2019</p>
+						<p align="center" class="u-gray-text">2020</p>
+					</div>
+				</div>
+				<div class="u-light-back" id="body4">
+					<div class="u-index-item">
+						<h2 align="center">Blog</h2>
+						<p class="u-link" align="center" onclick="handledisplay(2019)" onmouseover="highlight(this)" onmouseout="unhighlight(this)">2019 Year In Review</p>
+						<div id="2019" align="center" hidden>
+							<div class="card u-restricted-width overflow-auto">
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item"><p>The Winter Term</p></li>
+									<li class="list-group-item"><a href="blog/2019/the-spring-break.html">[004] 12/22: The Spring Break</a></li>
+									<li class="list-group-item"><p>The Spring Term</p></li>
+									<li class="list-group-item"><p>The Brewster Summer Program</p></li>
+									<li class="list-group-item"><a href="blog/2019/the-england-trip.html">[002] 12/19: The England Trip</a></li>
+									<li class="list-group-item"><p>The Summer</p></li>
+									<li class="list-group-item"><a href="blog/2019/the-arrival.html">[003] 12/21: The Arrival</a></li>
+									<li class="list-group-item"><p>The Fall Break</p></li>
+									<li class="list-group-item"><a href="blog/2019/the-fall-classes.html">[001] 12/18: The Fall Classes</a></li>
+									<li class="list-group-item"><a href="blog/2019/the-extracurriculars.html">[006] 12/25: The Extracurriculars</a></li>
+									<li class="list-group-item"><p>The Social Scene</p></li>
+									<li class="list-group-item"><p>The City</p></li>
+									<li class="list-group-item"><a href="blog/2019/the-urop.html">[005] 12/24: The UROP</a></li>
+									<li class="list-group-item"><p>The Miscellaneous</p></li>
+									<li class="list-group-item"><p>The Year</p></li>
+								</ul>
+							</div>
+						</div>
 
-					<p align="center" class="washout"><i>~ Data Is Beautiful ~</i></p>
-					<p align="center" class="washout"><i>~ Language Bites ~</i></p>
-					<p align="center" class="washout"><i>~ YouTube Adventures ~</i></p>
-					<p style="color: #007bff" align="center" onclick="handledisplay('random')" onmouseover="highlight(this)" onmouseout="unhighlight(this)"><i>~ Random Thoughts ~</i></p>
-					<div id="random" align="center" style="padding: 30px" hidden>
-						<div class="card restricted-list overflow-auto">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item"><a href="blog/random/oyster-omelette.html">+ [001] 3/18: Oyster Omelette +</a></li>
-								<li class="list-group-item"><a href="blog/random/writing-record-keeping.html">+ [002] 3/19-24: Writing vs Record Keeping +</a></li>
-							</ul>
+						<p align="center" class="u-gray-text">Data Is Beautiful</p>
+						<p align="center" class="u-gray-text">Language Bites</p>
+						<p align="center" class="u-gray-text">YouTube Adventures</p>
+						<p class="u-link" align="center" onclick="handledisplay('random')" onmouseover="highlight(this)" onmouseout="unhighlight(this)">Random Thoughts</p>
+						<div id="random" align="center" hidden>
+							<div class="card u-restricted-width overflow-auto">
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item"><a href="blog/random/oyster-omelette.html">[001] 3/18: Oyster Omelette</a></li>
+									<li class="list-group-item"><a href="blog/random/writing-record-keeping.html">[002] 3/19-24: Writing vs Record Keeping</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div style="background-color:#ff7675" id="body5">
-				<div class="index-item">
-					<h2 align="center">Contact</h2>
-					<p align="center"><b>Arun Wongprommoon</b></p>
-					<p align="center"><i>Bangkok, Thailand</i></p>
-					<p align="center">currently in <i>Cambridge, Massachusetts, US</i></p>
-					<p align="center" style="font-size: 16px">AlphaRomeoUniformNovemberWhiskeyPapaMike (at) MIT (dot) EDU</p>
-					<p align="center" style="font-size: 16px">github: rayaburong</p>
-					<p align="center" style="font-size: 16px">social media can be searched using real name</p>
+				<div class="u-dark-back u-light-text" id="body5">
+					<div class="u-index-item">
+						<h2 align="center">Contact</h2>
+						<p align="center"><b>Arun Wongprommoon</b></p>
+						<p align="center"><i>Bangkok, Thailand&emsp;|&emsp;Cambridge, MA</i></p>
+						<p align="center" style="font-size: 16px">Alpha Romeo Uniform November Whiskey Papa Mike (at) MIT (dot) EDU</p>
+						<p align="center" style="font-size: 16px">github: rayaburong</p>
+					</div>
 				</div>
-			</div>
-		</table>
+			</table>
+		</div>
+		<div class="col"></div>
 	</body>
 </HTML>
