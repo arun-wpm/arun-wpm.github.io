@@ -1,10 +1,13 @@
 :root {
-    --light: #DDDDDD;
+    --light: #eeeeee;
     --gray: #888888;
-    --dark: #222222;
+    --dark: #111111;
     --orange: #FC9024;
     --egg: #FEDCBA;
     --blue: #2490FC;
+
+    --highlight: #6c5ce7;
+    --section-break: #555555;
 }
 .u-orange-back {
     background-color: var(--orange);
@@ -21,6 +24,9 @@
 .u-link {
     color: var(--blue);
 }
+.u-white-text {
+    color: #ffffff;
+}
 .u-light-text {
     color: var(--light);
 }
@@ -29,6 +35,12 @@
 }
 .u-gray-text {
     color: var(--gray);
+}
+.u-thicc {
+    font-weight: 900;
+}
+.u-inherit-color {
+    color: inherit;
 }
 .u-index-item {
     padding-top: 10px;
@@ -44,29 +56,32 @@
     margin: 0px 0px 0px 0px;
 }
 .highlight {
-    color: #6c5ce7;
+    color: var(--highlight);
+}
+.section-break {
+    color:var(--section-break);
 }
 .u-unit {
     flex: 1;
 }
+
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: var(--light);
 }
 h1 {
-    /* color: var(--dark); */
-    font-size: 40px;
+    font-size: 45px;
+    font-weight: bolder;
 }
 h2 {
-    /* color: var(--dark); */
     font-size: 30px;
+    font-weight: bolder;
 }
-p {
-    font-family: "Montserrat";
-    font-size: 20px;
-    margin-bottom: 10px;
+h3 {
+    font-size: 25px;
+    font-weight: bolder;
 }
-a {
+p, div {
     font-family: "Montserrat";
     font-size: 20px;
     margin-bottom: 10px;
