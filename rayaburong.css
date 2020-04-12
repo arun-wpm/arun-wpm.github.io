@@ -27,6 +27,12 @@
 .u-white-text {
     color: #ffffff;
 }
+.u-blue-text {
+    color: var(--blue);
+}
+.u-orange-text {
+    color: var(--orange);
+}
 .u-light-text {
     color: var(--light);
 }
@@ -85,4 +91,8 @@ p, div {
     font-family: "Montserrat";
     font-size: 20px;
     margin-bottom: 10px;
+}
+.u-monospace {
+    font-family: 'Anonymous Pro', monospace;
+    font-weight: normal;
 }
