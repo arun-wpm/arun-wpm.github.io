@@ -1,0 +1,153 @@
+<HTML>
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="../../rayaburong.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>arun.</title>
+    </head>
+    <body class="row u-no-margin u-dark-text">
+        <div class="col"></div>
+        <div class="col" style="min-width: 1000px;">
+            <div align="center" class="u-orange-back u-white-text u-thicc" width="100%" id="arun">
+                <h1><a href="../../index.html" class="u-inherit-color">arun</a> > Blog > Random.</h1>
+                <p id="title">[005] Game of Life</p>
+                <p>4 May, 2020</p>
+            </div>
+            <div align="center" class="u-dark-back">
+                <canvas width="500px" height="500px" id="gameoflife"></canvas>
+            </div>
+            <div>
+                <p>Last night I stumbled across someone who coded a game of snake within 4 minutes and 30 seconds. While I'm surely not able to beat that, I was inspired by the idea of codinng a quick minigame with javascript. Here I'm doing the Game of Life to honor John Conway. It took me about an hour.</p>
+                <p>Press [space] to step, [enter] to toggle continuous stepping, and [escape] to clear the board. Draw with a mouse!</p>
+            </div>
+        </div>
+        <div class="col"></div>
+    </body>
+    <script>
+        const canvas = document.getElementById('gameoflife');
+        const ctx = canvas.getContext('2d');
+        const sz = 50;
+        const dot = 10;
+        let board = new Array(sz);
+        let temp = new Array(sz);
+        let qsum = new Array(sz);
+        for (let i = 0; i < sz; i++)
+        {
+            board[i] = new Array(sz);
+            temp[i] = new Array(sz);
+            for (let j = 0; j < sz; j++)
+                board[i][j] = 0;
+            qsum[i] = new Array(sz);
+        }
+        draw();
+        
+        document.addEventListener('keydown', logKey);
+        canvas.addEventListener('click', mouse);
+        let id = null;
+        function logKey(e)
+        {
+            switch (e.code)
+            {
+                case "Enter":
+                    if (id === null)
+                        id = setInterval(step, 100);
+                    else
+                    {
+                        clearInterval(id);
+                        id = null;
+                    }
+                    break;
+                case "Space":
+                    step();
+                    break;
+                case "Escape":
+                    clearCanvas();
+                    clearInterval(id);
+                    id = null;
+                    break;
+            }
+        }
+
+        function draw()
+        {
+            ctx.clearRect(0, 0, dot*sz, dot*sz);
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0, 0, dot*sz, dot*sz);
+            ctx.fillStyle = 'white';
+            for (let i = 0; i < sz; i++)
+                for (let j = 0; j < sz; j++)
+                    if (board[i][j] == 1)
+                        ctx.fillRect(i*dot, j*dot, dot, dot);
+        }
+
+        function clearCanvas()
+        {
+            for (let i = 0; i < sz; i++)
+                for (let j = 0; j < sz; j++)
+                    board[i][j] = 0;
+            draw();
+        }
+
+        function step()
+        {
+            for (let i = 0; i < sz; i++)
+            {
+                for (let j = 0; j < sz; j++)
+                {
+                    qsum[i][j] = board[i][j];
+                    if (i > 0) qsum[i][j] += qsum[i-1][j];
+                    if (j > 0) qsum[i][j] += qsum[i][j-1];
+                    if (i > 0 && j > 0) qsum[i][j] -= qsum[i-1][j-1];
+                    temp[i][j] = board[i][j];
+                }
+            }
+            // console.log(qsum);
+            let maxi, maxj, mini, minj, neigh;
+            for (let i = 0; i < sz; i++)
+            {
+                for (let j = 0; j < sz; j++)
+                {
+                    maxi = Math.min(i+1, sz-1);
+                    maxj = Math.min(j+1, sz-1);
+                    mini = Math.max(i-2, -1);
+                    minj = Math.max(j-2, -1);
+                    if (mini < 0 && minj < 0)
+                        neigh = qsum[maxi][maxj] - temp[i][j];
+                    else if (mini < 0)
+                        neigh = qsum[maxi][maxj] - qsum[maxi][minj] - temp[i][j];
+                    else if (minj < 0)
+                        neigh = qsum[maxi][maxj] - qsum[mini][maxj] - temp[i][j];
+                    else
+                        neigh = qsum[maxi][maxj] - qsum[mini][maxj] - qsum[maxi][minj] + qsum[mini][minj] - temp[i][j];
+                    // if (temp[i][j] == 1)
+                        // console.log(i, j, temp[i][j], neigh);
+
+                    if (temp[i][j] == 1)
+                    {
+                        if (neigh < 2 || neigh > 3)
+                            board[i][j] = 0;
+                    }
+                    else if (neigh == 3)
+                        board[i][j] = 1;
+                }
+            }
+            draw();
+        }
+
+        function mouse(e)
+        {
+            if (id !== null)
+            {
+                clearInterval(id);
+                id = null;
+            }
+            let rect = canvas.getBoundingClientRect();
+            let x = Math.floor((e.clientX - rect.left)/dot);
+            let y = Math.floor((e.clientY - rect.top)/dot);
+            board[x][y] = 1 - board[x][y];
+            draw();
+        }
+    </script>
+</HTML>
