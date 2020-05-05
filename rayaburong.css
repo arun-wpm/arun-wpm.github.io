@@ -8,6 +8,8 @@
 
     --highlight: #6c5ce7;
     --section-break: #555555;
+
+    --animation-time: 0.5s;
 }
 .u-orange-back {
     background-color: var(--orange);
@@ -23,6 +25,12 @@
 }
 .u-link {
     color: var(--blue);
+    transition: all var(--animation-time);
+}
+.u-link:hover {
+    background-color: var(--orange);
+    color: #ffffff;
+    transition: all var(--animation-time);
 }
 .u-white-text {
     color: #ffffff;
@@ -54,6 +62,12 @@
 }
 .u-restricted-width {
     max-width: 600px;
+}
+.u-height-inherit {
+    height: inherit;
+}
+.u-height-100 {
+    height: 100%;
 }
 .u-distribute {
     justify-content: space-around;
@@ -91,6 +105,15 @@ p, div {
     font-family: "Montserrat";
     font-size: 20px;
     margin-bottom: 10px;
+}
+a {
+    color: var(--blue);
+    text-decoration: none;
+    transition: all var(--animation-time);
+}
+a:hover {
+    text-decoration: none;
+    transition: all var(--animation-time);
 }
 .u-monospace {
     font-family: 'Anonymous Pro', monospace;

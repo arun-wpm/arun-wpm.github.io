@@ -2,32 +2,41 @@
 <HTML lang="en">
 	<script>
 		var num = 1;
+		setInterval(cycle, 1000);
 		function cycle()
 		{
-			document.getElementById("intro").src= "images/intro/" + num + ".jpg";
+			document.getElementById("intro").src = "images/intro/" + num + ".jpg";
 			num++;
 			if (num > 5)
 			{
 				num = 1;
 			}
-			setTimeout(cycle, 1000);
 		}
-		function highlight(element)
-		{
-			element.classList.add("u-orange-back");
+		function growdisplay(name, full, pc) {
+			document.getElementById(name).setAttribute("style", `height:${pc*full/100}px`);
+			if (pc < 100)
+				setTimeout(growdisplay, 3, name, full, pc+1);
 		}
-		function unhighlight(element)
-		{
-			element.classList.remove("u-orange-back");
+		function shrinkdisplay(name, full, pc) {
+			document.getElementById(name).setAttribute("style", `height:${pc*full/100}px`);
+			if (pc > 0)
+				setTimeout(shrinkdisplay, 3, name, full, pc-1);
+			else
+			{
+				document.getElementById(name).hidden = true;
+				document.getElementById(name).setAttribute("style", `height:${full}px`);
+			}
 		}
 		function handledisplay(name) {
 			if (document.getElementById(name).hidden == true)
 			{
 				document.getElementById(name).hidden = false;
+				growdisplay(name, document.getElementById(name).clientHeight, 0);
 			}
 			else
 			{
-				document.getElementById(name).hidden = true;
+				let full = document.getElementById(name).clientHeight;
+				shrinkdisplay(name, full, 100);
 			}
 		}
 	</script>
@@ -53,7 +62,7 @@
 				<div class="u-egg-back" id="body1">
 					<div class="u-index-item">
 						<h2 align="center">Profile</h2>
-						<div align="center" onmouseover="highlight(this)" onmouseout="unhighlight(this)">
+						<div align="center" class="u-link">
 							<a href="profile/education.html"><p>Education</p></a>
 						</div>
 						<p align="center" class="u-gray-text">Awards</p>
@@ -65,51 +74,59 @@
 						<h2 align="center">Projects</h2>
 						<div align="center" class="row row-cols-1 row-cols-md-3 u-no-margin">
 							<div class="col mb-1">
-								<div class="card bg-light">
-									<p align="center" class="u-gray-text">MWITS Chemical Database App</p>
-									<img width="100px" height="100px" src="images/camera.jpg"/>
+								<div class="card u-link u-height-100">
+									<p>MWITS Chemical Database App</p>
+									<img style="object-fit:contain" height="100px" src="projects/mwitschemical/mwitschemical.png"/>
 								</div>
 							</div>
 							<div class="col mb-1">
-								<div class="card bg-light">
-									<p align="center" class="u-gray-text">Ambient Detector</p>
-									<img width="100px" height="100px" src="images/ambientdetector.png"/>
+								<div class="card u-link u-height-100">
+									<p>Ambient Detector</p>
+									<img style="object-fit:contain" height="100px" src="projects/ambientdetector/ambientdetector.png"/>
 								</div>
 							</div>
 							<div class="col mb-1">
-								<div class="card bg-light">
-									<p align="center" class="u-gray-text">Exeter Dining Hall App</p>
-									<img width="100px" height="100px" src="images/exeter.jpg"/>
+								<div class="card u-link u-height-100">
+									<p>Exeter Dining Hall App</p>
+									<img style="object-fit:contain" height="100px" src="projects/dininghall/dininghall.png"/>
 								</div>
 							</div>
 							<div class="col mb-1">
-								<div class="card bg-light">
-									<p align="center" class="u-gray-text">Recyclotron</p>
-									<img width="100px" height="100px" src="images/recyclotron.png"/>
+								<a href="projects/recyclotron/recyclotron.html">
+									<div class="card u-link u-height-100">
+										<p>Recyclotron</p>
+										<img style="object-fit:contain" height="100px" src="projects/recyclotron/recyclotron.png"/>
+									</div>
+								</a>
+							</div>
+							<div class="col mb-1">
+								<div class="card u-link u-height-100">
+									<p>CS999: Experimental Research</p>
+									<img style="object-fit:contain" height="100px" src="projects/cs999/cs999.png"/>
 								</div>
 							</div>
 							<div class="col mb-1">
-								<div class="card bg-light">
-									<p align="center" class="u-gray-text">CS999: Experimental Research</p>
-									<img width="100px" height="100px" src="images/camera.jpg"/>
+								<div class="card u-link u-height-100">
+									<p>HackMIT: LectHub</p>
+									<img style="object-fit:contain" height="100px" src="projects/lecthub/lecthub.png"/>
 								</div>
 							</div>
 							<div class="col mb-1">
-								<div class="card bg-light">
-									<p align="center" class="u-gray-text">HackMIT: LectHub</p>
-									<img width="100px" height="100px" src="images/camera.jpg"/>
+								<div class="card u-link u-height-100">
+									<p>21M.080: Low Resolution Spectral Modelling Synthesis</p>
+									<img style="object-fit:contain" height="100px" src="projects/spectralmodelling/spectralmodelling.png"/>
 								</div>
 							</div>
 							<div class="col mb-1">
-								<div class="card bg-light">
-									<p align="center" class="u-gray-text">21M.080: Low Resolution Spectral Modelling Synthesis</p>
-									<img width="100px" height="100px" src="images/camera.jpg"/>
+								<div class="card u-link u-height-100">
+									<p>11.S188: MBTA, Who Is Unreachable?</p>
+									<img style="object-fit:contain" height="100px" src="projects/11s188/11s188.png"/>
 								</div>
 							</div>
 							<div class="col mb-1">
-								<div class="card bg-light">
-									<p align="center" class="u-gray-text">web.lab: JourNext</p>
-									<img width="100px" height="100px" src="images/camera.jpg"/>
+								<div class="card u-link u-height-100">
+									<p>web.lab: JourNext</p>
+									<img style="object-fit:contain" height="100px" src="projects/journext/journext.png"/>
 								</div>
 							</div>
 						</div>
@@ -128,9 +145,9 @@
 				<div class="u-light-back" id="body4">
 					<div class="u-index-item">
 						<h2 align="center">Blog</h2>
-						<p class="u-link" align="center" onclick="handledisplay(2019)" onmouseover="highlight(this)" onmouseout="unhighlight(this)">2019 Year In Review</p>
+						<p class="u-link" align="center" onclick="handledisplay(2019)">2019 Year In Review</p>
 						<div id="2019" align="center" hidden>
-							<div class="card u-restricted-width overflow-auto">
+							<div class="card u-restricted-width overflow-auto u-height-inherit">
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item"><p>The Winter Term</p></li>
 									<li class="list-group-item"><a href="blog/2019/the-spring-break.html">[004] 12/22: The Spring Break</a></li>
@@ -150,9 +167,9 @@
 								</ul>
 							</div>
 						</div>
-						<p class="u-link" align="center" onclick="handledisplay('random')" onmouseover="highlight(this)" onmouseout="unhighlight(this)">2020 Random Thoughts</p>
+						<p class="u-link" align="center" onclick="handledisplay('random')">2020 Random Thoughts</p>
 						<div id="random" align="center" hidden>
-							<div class="card u-restricted-width overflow-auto">
+							<div class="card u-restricted-width overflow-auto u-height-inherit">
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item"><a href="blog/random/oyster-omelette.html">[001] 3/18: Oyster Omelette</a></li>
 									<li class="list-group-item"><a href="blog/random/writing-record-keeping.html">[002] 3/19-24: Writing vs Record Keeping</a></li>
