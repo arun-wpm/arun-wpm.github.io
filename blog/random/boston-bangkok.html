@@ -12,15 +12,23 @@
         <div class="u-flex-grow" style="max-width: 1000px;">
             <div align="center" class="u-orange-back u-white-text u-thicc" width="100%" id="arun">
                 <h1><a href="../../index.html" class="u-inherit-color">arun</a> > Blog > Random.</h1>
-                <p id="title">[005] Game of Life</p>
-                <p>4 May, 2020</p>
+                <p id="title">[006] Boston Bangkok</p>
+                <p>8 May, 2020</p>
             </div>
             <div align="center" class="u-dark-back">
-                <canvas width="500px" height="500px" id="gameoflife"></canvas>
+                <img width="100%" class="u-restricted-width u-center" style="object-fit:cover" src="boston-bangkok.png" />
             </div>
             <div>
-                <p>Last night I stumbled across someone who coded a game of snake within 4 minutes and 30 seconds. While I'm surely not able to beat that, I was inspired by the idea of codinng a quick minigame with javascript. Here I'm doing the Game of Life to honor John Conway. It took me about an hour.</p>
-                <p>Press <span class="highlight">[space]</span> to step, <span class="highlight">[enter]</span> to toggle continuous stepping, and <span class="highlight">[escape]</span> to clear the board. Draw with a mouse! (Sorry to all on mobile)</p>
+                <p align="center" class="u-gray-text"><i>Wait... something's not right here...</i></p>
+                <p>Just before I was evicted from MIT this past March, a couple of friends and I went for a lunch down near Central Square. They asked me if I lived in Bangkok, to which I said yes. Then they asked me: "Where in Bangkok?" It was a hard question to answer, and the best answer I could think of was... in the suburbs, quite far away from the city center. I tried to make an analogy with Boston's T, but it flopped because I didn't know which station my house would correspond to - I just don't have a grasp of how big the T spans in comparison to Bangkok's BTS, MRT and ARL. I was like... "maybe Braintree distance away from the city center if we measure from Downtown Crossing?" It was useless because I couldn't know if it was true, and they didn't know where Braintree is, either.</p>
+                <p>Just today, after leaving this thought on the shelf for a long time, I decided to fully investigate. What would it look like if I overlayed Boston's MBTA system on top of Bangkok's geography? I first found a handy .kmz that contained Boston's train lines, plus extra information into the future about the Green Line Extension <a href="https://www.mbta.com/projects/green-line-extension-glx">here</a>. I was thinking for a while as to how I would shift all these points in the drawing onto Bangkok, until I searched up what .kmz looks like. A .kmz is merely a .zip with a .kml inside, which has .xml notation. Sweet! I downloaded the .kmz, changed the type extension to .zip then opened up the .kml to check. It's exactly that.</p>
+                <p>The job is much easier now that I can read the .kml. I scrolled through and saw that all the points are on their own lines, and those lines only contained 12 spaces in the front, a longitude, a latitude and an elevation. That's it! I wrote a quick small <a href="kmz_shift.py">python script</a> to shift those numbers (where Downtown Crossing would correspond to Siam) and it's done.</p>
+                <p align="center"><a href="https://www.google.com/maps/d/drive?state=%7B%22ids%22%3A%5B%221FLw8TDHTiLa6-EU4-13gYjzA7C2kTAyU%22%5D%2C%22action%22%3A%22open%22%2C%22userId%22%3A%22104951504414351425761%22%7D&usp=sharing"><i>Boston MBTA Onto Bangkok</i></a></p>
+                <div class="u-egg-back">
+                    <h3>Conclusion</h3>
+                    <p>Bangkok is <b>HUGE</b>. Alewife, the terminal station for the northern end of the Red Line, corresponds to the villages of Taling Chan. Oak Grove, the terminal station for the northern end of the Orange Line, already in Malden which is two cities north of Boston, corresponnds to Wong Sawang of the Purple Line MRT - the third of 16 stations outbound. I've been to the far end of the Purple Line, and it definitely feels a bit more in the city than Alewife or Oak Grove. One sad thing about Bangkok is that it doesn't currently have a line in the same direction as MBTA Blue Line and my home is in that general direction. What's more... you my home is even outside the extent of that image. Much far, so suburb - explains why it takes me 1.5-2 hours to get to Siam a.k.a "Downtown Crossing".</p>
+                </div>
+                <p>Will see if I can try do the other way around...</p>
             </div>
         </div>
         <div class="u-flex-grow"></div>
