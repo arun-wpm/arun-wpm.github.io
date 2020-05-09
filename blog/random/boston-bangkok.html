@@ -24,25 +24,25 @@
                 <p>Just today, after leaving this thought on the shelf for a long time, I decided to fully investigate. What would it look like if I overlayed Boston's MBTA system on top of Bangkok's geography? I first found a handy .kmz that contained Boston's train lines, plus extra information into the future about the Green Line Extension <a href="https://www.mbta.com/projects/green-line-extension-glx">here</a>. I was thinking for a while as to how I would shift all these points in the drawing onto Bangkok, until I searched up what .kmz looks like. A .kmz is merely a .zip with a .kml inside, which has .xml notation. Sweet! I downloaded the .kmz, changed the type extension to .zip then opened up the .kml to check. It's exactly that.</p>
                 <p>The job is much easier now that I can read the .kml. I scrolled through and saw that all the points are on their own lines, and those lines only contained 12 spaces in the front, a longitude, a latitude and an elevation. That's it! I wrote a quick small <a href="kmz_shift.py">python script</a> to shift those numbers (where Downtown Crossing would correspond to Siam) and it's done.</p>
                 <div align="center">
-                    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1FLw8TDHTiLa6-EU4-13gYjzA7C2kTAyU" width="640" height="480"></iframe>
+                    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1FLw8TDHTiLa6-EU4-13gYjzA7C2kTAyU" width="100%" height="480"></iframe>
                 </div>
                 <p align="center" class="u-gray-text"><i>Boston MBTA Onto Bangkok</i></p>
                 <div class="u-egg-back">
                     <h3>Conclusion</h3>
-                    <p>Bangkok is <b>HUGE</b>. Alewife, the terminal station for the northern end of the Red Line, corresponds to the villages of Taling Chan. Oak Grove, the terminal station for the northern end of the Orange Line, already in Malden which is two cities north of Boston, corresponnds to Wong Sawang of the Purple Line MRT - the third of 16 stations outbound. I've been to the far end of the Purple Line, and it definitely feels a bit more in the city than Alewife or Oak Grove. One sad thing about Bangkok is that it doesn't currently have a line in the same direction as MBTA Blue Line and my home is in that general direction. What's more... my home is even outside the extent of the Blue Line. It's extremely far, and quite suburban - explains why it takes me 1-1.5 hours to get to Siam, a.k.a. "Downtown Crossing".</p>
+                    <p>Bangkok is <b>HUGE</b>. Alewife, the terminal station for the northern end of the Red Line, corresponds to the villages of Taling Chan. Oak Grove, the terminal station for the northern end of the Orange Line, already in Malden which is two cities north of Boston, corresponds to Wong Sawang of the Purple Line MRT - the third of 16 stations outbound. I've been to the far end of the Purple Line, and it definitely feels a bit more in the city than Alewife or Oak Grove. One sad thing about Bangkok is that it doesn't currently have a line in the same direction as MBTA Blue Line and my home is in that general direction. What's more... my home is even outside the extent of the Blue Line. It's extremely far, and quite suburban - explains why it takes me 1-1.5 hours to get to Siam, a.k.a. "Downtown Crossing".</p>
                 </div>
                 <p>Will see if I can try do the other way around...</p>
                 <h3>Update 1</h3>
                 <p><span class="highlight">talkon</span> suggested I include the MBTA Commuter Rail as well. These are, for those not familiar with Boston's transit, the diesel train lines that go all the way around different parts of eastern Massachusetts and Rhode Island. Here it is, credits to Doug Tillberg for the <a href="https://maps.google.com/maps/ms?ie=UTF8&oe=UTF8&msa=0&msid=113211943653812127531.00043c7f1673a348bb9d8">original Boston MBTA .kmz</a>.</p>
                 <div align="center">
-                    <iframe align="center" src="https://www.google.com/maps/d/u/0/embed?mid=1eQbKdXjZ585jP1NYZA4iTSvPb_xwplz3" width="640" height="480"></iframe>
+                    <iframe align="center" src="https://www.google.com/maps/d/u/0/embed?mid=1eQbKdXjZ585jP1NYZA4iTSvPb_xwplz3" width="100%" height="480"></iframe>
                 </div>
                 <p align="center" class="u-gray-text"><i>Boston MBTA Onto Bangkok II</i></p>
                 <p>Glad to know I'm covered by the MBTA Commuter Rail! I'm on the "Newburyport Line". Interestingly, the travel time from the closest station to my home on the "Newburyport Line" to "Downtown Crossing" is 42 minutes. Bangkok, we can do better. Hopefully when the BTS Green Line extends further north it will cut my travel time to Siam.</p>
                 <h3>Update 2</h3>
                 <p>The other way around! Credits to whoever made the <a href="https://maps.google.com/maps/ms?ie=UTF8&om=1&hl=en&msa=0&msid=218138482391059342984.00047554deb6dd88270d4&source=embed&ll=13.737721,100.55292&spn=0.152879,0.115281">original complete Bangkok BTS/MRT plan .kmz</a>. I recolored the lines a little bit.</p>
                 <div align="center">
-                    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1c4HGkY0UnTZ-wRj2c1QvTCiSm3qHQSSm" width="640" height="480"></iframe>
+                    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1c4HGkY0UnTZ-wRj2c1QvTCiSm3qHQSSm" width="100%" height="480"></iframe>
                 </div>
                 <p align="center" class="u-gray-text"><i>Bangkok BTS/MRT Onto Boston</i></p>
                 <p>The lines that we have how are the Blue MRT, Light Green BTS, most of Dark Green BTS, eastern half of ARL and northern half of Purple MRT.</p>
