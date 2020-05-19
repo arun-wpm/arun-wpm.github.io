@@ -79,6 +79,13 @@
 .u-no-margin {
     margin: 0px 0px 0px 0px;
 }
+.u-margin {
+    margin: 10px;
+}
+.u-dark-border {
+    border: 2.5px solid;
+    border-color: var(--dark);
+}
 .highlight {
     color: var(--highlight);
 }
