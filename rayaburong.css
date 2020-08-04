@@ -20,6 +20,9 @@
 .u-light-back {
     background-color: var(--light);
 }
+.u-white-back {
+    background-color: #ffffff;
+}
 .u-dark-back {
     background-color: var(--dark);
 }
@@ -88,6 +91,10 @@
 }
 .highlight {
     color: var(--highlight);
+}
+.ipa {
+    color: var(--orange);
+    font-family: 'Segoe UI', sans-serif;
 }
 .section-break {
     color:var(--section-break);
