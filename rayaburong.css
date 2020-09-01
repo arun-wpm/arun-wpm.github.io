@@ -102,6 +102,9 @@
 .u-unit {
     flex: 1;
 }
+.u-round {
+    border-radius: 20%;
+}
 
 body {
     font-family: 'Montserrat', sans-serif;
