@@ -132,6 +132,12 @@ a {
     text-decoration: none;
     transition: all var(--animation-time);
 }
+tr {
+    padding: 10px;
+}
+td {
+    padding: 10px;
+}
 a:hover {
     text-decoration: none;
     transition: all var(--animation-time);
