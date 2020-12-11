@@ -33,7 +33,7 @@
                     <p>Most of the other things are written using plain javascript.</p>
                 </div>
                 <div align="center" class="u-orange-back">
-                    <h3>Where are you?</h3>
+                    <h3>Where are you? Click on the map!</h3>
                     <canvas width="800px" height="418px" id="map"></canvas>
                     <p id="loc"></p>
                     <h3>When will your classes be?</h3>
@@ -65,9 +65,11 @@
         </div>
         <div class="u-flex-grow"></div>
     </body>
-    <script src="../../node_modules/tz-lookup/tz.js"></script>
+    <script src="https://unpkg.com/spacetime-geo"></script>
     <script src='https://unpkg.com/spacetime'></script>
     <script>
+        spacetime.extend(spacetimeGeo);
+
         const setdate = "December 10 2020";
         const mapcanvas = document.getElementById('map');
         const mapctx = mapcanvas.getContext('2d');
@@ -77,8 +79,8 @@
         const loc = document.getElementById('loc');
         let lat = 42.355649, lon = -71.099538, tz = "America/New_York";
         let localtime;
-        tz = tzlookup(lat, lon);
-        localtime = spacetime.now(tz);
+        localtime = spacetime.now().in([lat, lon]);
+        tz = localtime.timezone().name;
         loc.innerText = "MacGregor is at " + lat.toPrecision(4) + "," + lon.toPrecision(4) + " " + tz + " where it is " + localtime.time();
 
         mapimage.addEventListener('load', e => {
@@ -101,8 +103,8 @@
             lat = Math.cos(((event.clientY - rect.top) - 270)/192 + Math.PI/2)*85;
             lon = ((event.clientX - rect.left) - 374)/800*360;
             lon = (lon > 180)?lon - 360:lon;
-            tz = tzlookup(lat, lon);
-            localtime = spacetime.now(tz);
+            localtime = spacetime.now().in([lat, lon]);
+            tz = localtime.timezone().name;
             loc.innerText = lat.toPrecision(4) + "," + lon.toPrecision(4) + " " + tz + " where it is " + localtime.time();
             updateClassList();
             updateSleepList();
