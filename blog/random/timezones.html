@@ -1,0 +1,181 @@
+<HTML>
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="../../rayaburong.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>arun.</title>
+    </head>
+    <body class="row u-no-margin u-dark-text">
+        <div class="u-flex-grow"></div>
+        <div class="u-flex-grow" style="max-width: 1000px;">
+            <div align="center" class="u-orange-back u-white-text u-thicc" width="100%" id="arun">
+                <h1><a href="../../index.html" class="u-inherit-color">arun</a> > Blog > Random.</h1>
+                <p id="title">[016] Time Zones: A Visualization</p>
+                <p>10 December, 2020</p>
+            </div>
+            <div align="center" class="u-dark-back">
+                <img width="100%" class="u-restricted-width u-center" style="object-fit:cover" src="timezones.jpg" />
+            </div>
+            <div>
+                <div>
+                    <h2>Blurb</h2>
+                    <p>It's 2020. The year where everyone got to learn more about being inside more than ever, and the year where everyone had to be mindful about time zones more than ever. I have been taking classes on zoom for the better part of the year, and the experience has not been the greatest. I have talked about the unique situation that I'm in multiple times, and this visualization is an idea I have to try to quantify the weight of my situation.</p>
+                    <p>I wake up to an already finished day, with dozens of "HAPPENING NOW!" club emails that were dated, dozens of conversations between friend groups already finished, and new lectures to be watched. I walk downstairs to my parents, who insist I wake up and sleep at a more normal time, exercise more, help out with chores more, and be less of a hermit. I work on classwork in solitude, only to join some more synchronous zoom classes after dinner when those in the United States are waking up for the day I'm already close to finishing. I excuse my friends to sleep, just as they are about to start doing work.</p>
+                    <p>Read more of my rants <a href="how-i'm-doing.html">here</a>.</p>
+                    <p>Sure, I'm truly grateful that classes have gone out to accommodate those 10% of us internationals (even less so of a proportion whose time zones are unbearable like me... 1% maybe?) - but I do feel that I'm forgotten sometimes. Not always, though. There was a wave of international student appreciation posts on MIT confessions. There are still many people who check up on me during the term, making spontaneous zoom calls and such. There are also chances for me meet new people. To those experiences, and to everyone who sees us, 🧡</p>
+                </div>
+                <div class="u-egg-back">
+                    <h2>Methodology</h2>
+                    <p>The picture above (once it's up) was a render of my room at home, where I spend 70% of my fall term in. Back in spring, I took 21M.606 and one of the assignments was to draw a "set" design, of any room we are in close proximity to. I use that as a base to model after on Blender.</p>
+                    <p>The events histogram is made by first downloading all my archived emails in Outlook, writing a python script with regex matching to extract out any mention of time in emails, and tallying those times up. This is assuming most mentions of times in emails are events, deadlines or something of interest at MIT, and are in Eastern Time.</p>
+                    <p>Most of the other things are written using plain javascript.</p>
+                </div>
+                <div align="center" class="u-orange-back">
+                    <h3>Where are you?</h3>
+                    <canvas width="800px" height="418px" id="map"></canvas>
+                    <p id="loc"></p>
+                    <h3>When will your classes be?</h3>
+                    <div id="classes">
+                        <label for="classstart">Start (Eastern):</label>
+                        <input type="time" id="classstart">
+                        <label for="classend">End (Eastern):</label>
+                        <input type="time" id="classend">
+                        <button onclick="addClass()">Add Class</button>
+                        <div id="classlist"></div>
+                    </div>
+                    <h3>When will your sleep be?</h3>
+                    <div id="sleep">
+                        <label for="sleepstart">Start (local):</label>
+                        <input type="time" id="sleepstart">
+                        <label for="sleepend">End (local):</label>
+                        <input type="time" id="sleepend">
+                        <button onclick="addSleep()">Add Sleep</button>
+                        <div id="sleeplist"></div>
+                    </div>
+                    <h3>Eastern Time Histogram</h3>
+                    <canvas width="720px" height="500px" id="easternhist"></div>
+                    <p>to be added</p>
+                </div>
+                <div align="center">
+                    <img width="100%" style="object-fit:cover" src="../random-footer.svg" />
+                </div>
+            </div>
+        </div>
+        <div class="u-flex-grow"></div>
+    </body>
+    <script src="../../node_modules/tz-lookup/tz.js"></script>
+    <script src='https://unpkg.com/spacetime'></script>
+    <script>
+        const setdate = "December 10 2020";
+        const mapcanvas = document.getElementById('map');
+        const mapctx = mapcanvas.getContext('2d');
+        const mapimage = new Image();
+        mapimage.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/World_Time_Zones_Map.png/800px-World_Time_Zones_Map.png";
+
+        const loc = document.getElementById('loc');
+        let lat = 42.355649, lon = -71.099538, tz = "America/New_York";
+        let localtime;
+        tz = tzlookup(lat, lon);
+        localtime = spacetime.now(tz);
+        loc.innerText = "MacGregor is at " + lat.toPrecision(4) + "," + lon.toPrecision(4) + " " + tz + " where it is " + localtime.time();
+
+        mapimage.addEventListener('load', e => {
+            //why doesn't it always load?
+            mapctx.drawImage(mapimage, 2, 3, 796, 416, 0, 0, 800, 418);
+        });
+        mapcanvas.addEventListener('click', event => {
+            rect = mapcanvas.getBoundingClientRect();
+            //Alert: 82.5018* N = 23
+            //75* N = 60
+            //60* N = 117
+            //45* N = 162
+            //30* N = 201
+            //15* N = 236
+            // 0* N = 270
+            //15* S = 303
+            //30* S = 338
+            //45* S = 377
+            //Port Stephens: 52.0977* S = 397
+            lat = Math.cos(((event.clientY - rect.top) - 270)/192 + Math.PI/2)*85;
+            lon = ((event.clientX - rect.left) - 374)/800*360;
+            lon = (lon > 180)?lon - 360:lon;
+            tz = tzlookup(lat, lon);
+            localtime = spacetime.now(tz);
+            loc.innerText = lat.toPrecision(4) + "," + lon.toPrecision(4) + " " + tz + " where it is " + localtime.time();
+            updateClassList();
+            updateSleepList();
+            updateHistogram();
+        });
+
+        const classes = document.getElementById('classes');
+        const classlist = document.getElementById('classlist');
+        const classstart = document.getElementById('classstart');
+        const classend = document.getElementById('classend');
+        let classarray = [];
+        function addClass(event) {
+            let start = classstart.value;
+            let end = classend.value;
+            let s = new spacetime(setdate, 'America/New_York');
+            s = s.hour(start.split(':')[0]);
+            s = s.minute(start.split(':')[1]);
+            s = s.goto(tz);
+            let e = new spacetime(setdate, 'America/New_York');
+            e = e.hour(end.split(':')[0]);
+            e = e.minute(end.split(':')[1]);
+            e = e.goto(tz);
+            classarray.push([start, end, s, e]);
+            updateClassList();
+        }
+
+        function updateClassList() {
+            classlist.innerHTML = "";
+            for (let i = 0; i < classarray.length; i++) {
+                classarray[i][2] = classarray[i][2].goto(tz);
+                classarray[i][3] = classarray[i][3].goto(tz);
+                classlist.innerHTML += "<p>" + classarray[i][0] + " to " + classarray[i][1] + " Eastern is locally at <span class=\"highlight\">" + classarray[i][2].time() + " to " + classarray[i][3].time() + "</span></p>";
+            }
+        }
+
+        const sleep = document.getElementById('sleep');
+        const sleeplist = document.getElementById('sleeplist');
+        const sleepstart = document.getElementById('sleepstart');
+        const sleepend = document.getElementById('sleepend');
+        let sleeparray = [];
+        function addSleep(event) {
+            let start = sleepstart.value;
+            let end = sleepend.value;
+            let s = new spacetime(setdate, tz);
+            s = s.hour(start.split(':')[0]);
+            s = s.minute(start.split(':')[1]);
+            s = s.goto('America/New_York');
+            let e = new spacetime(setdate, tz);
+            e = e.hour(end.split(':')[0]);
+            e = e.minute(end.split(':')[1]);
+            e = e.goto('America/New_York');
+            sleeparray.push([start, end, s, e]);
+            updateSleepList();
+        }
+
+        function updateSleepList() {
+            sleeplist.innerHTML = "";
+            for (let i = 0; i < sleeparray.length; i++) {
+                let s = new spacetime(setdate, tz);
+                s = s.hour(sleeparray[i][0].split(':')[0]);
+                s = s.minute(sleeparray[i][0].split(':')[1]);
+                sleeparray[i][2] = s.goto('America/New_York');
+                let e = new spacetime(setdate, tz);
+                e = e.hour(sleeparray[i][1].split(':')[0]);
+                e = e.minute(sleeparray[i][1].split(':')[1]);
+                sleeparray[i][3] = e.goto('America/New_York');
+                sleeplist.innerHTML += "<p>" + sleeparray[i][0] + " to " + sleeparray[i][1] + " local is at <span class=\"highlight\">" + sleeparray[i][2].time() + " to " + sleeparray[i][3].time() + "</span> Eastern</p>";
+            }
+        }
+
+        const easternhist = document.getElementById('easternhist');
+        const histctx = easternhist.getContext('2d');
+        function updateHistogram() {
+        }
+    </script>
+</HTML>
