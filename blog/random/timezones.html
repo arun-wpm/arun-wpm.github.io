@@ -39,25 +39,54 @@
                     <h3>When will your classes be?</h3>
                     <div id="classes">
                         <label for="classstart">Start (Eastern):</label>
-                        <input type="time" id="classstart">
+                        <input type="time" id="classstart" step="1800">
                         <label for="classend">End (Eastern):</label>
-                        <input type="time" id="classend">
-                        <button onclick="addClass()">Add Class</button>
+                        <input type="time" id="classend" step="1800">
+                        <input type="checkbox" id="Mc" name="Mc">
+                        <label for="Mc">M</label>
+                        <input type="checkbox" id="Tc" name="Tc">
+                        <label for="Tc">T</label>
+                        <input type="checkbox" id="Wc" name="Wc">
+                        <label for="Wc">W</label>
+                        <input type="checkbox" id="Rc" name="Rc">
+                        <label for="Rc">R</label>
+                        <input type="checkbox" id="Fc" name="Fc">
+                        <label for="Fc">F</label>
+                        <input type="checkbox" id="Sc" name="Sc">
+                        <label for="Sc">S</label>
+                        <input type="checkbox" id="Uc" name="Uc">
+                        <label for="Uc">U</label>
+                        <button onclick="addClass()">Add</button>
                         <div id="classlist"></div>
                     </div>
                     <h3>When will your sleep be?</h3>
                     <div id="sleep">
                         <label for="sleepstart">Start (local):</label>
-                        <input type="time" id="sleepstart">
+                        <input type="time" id="sleepstart" step="1800">
                         <label for="sleepend">End (local):</label>
-                        <input type="time" id="sleepend">
-                        <button onclick="addSleep()">Add Sleep</button>
+                        <input type="time" id="sleepend" step="1800">
+                        <input type="checkbox" id="Ms" name="Ms">
+                        <label for="Ms">M</label>
+                        <input type="checkbox" id="Ts" name="Ts">
+                        <label for="Ts">T</label>
+                        <input type="checkbox" id="Ws" name="Ws">
+                        <label for="Ws">W</label>
+                        <input type="checkbox" id="Rs" name="Rs">
+                        <label for="Rs">R</label>
+                        <input type="checkbox" id="Fs" name="Fs">
+                        <label for="Fs">F</label>
+                        <input type="checkbox" id="Ss" name="Ss">
+                        <label for="Ss">S</label>
+                        <input type="checkbox" id="Us" name="Us">
+                        <label for="Us">U</label>
+                        <button onclick="addSleep()">Add</button>
                         <div id="sleeplist"></div>
                     </div>
-                    <h3>Eastern Time Histogram</h3>
-                    <canvas width="720px" height="500px" id="easternhist"></div>
-                    <p>to be added</p>
+                    <h3 id="histtitle">Local Time Histogram</h3>
+                    <canvas width="720px" height="550px" id="hist"></canvas>
+                    <p>Customize view: Eastern <input type="range" id="histtype" min="0" max="1" value="1"> Local</p>
                 </div>
+                <p>Disclaimer: Since I set the smallest subdivision of time of email buckets and input to be 30 minutes, time zones that do not align to the hour or the half hour might trigger unexpected behavior. I might divide it further into 15 minutes later. Sorry to the people in Nepal, those five places in Australia (Border Village, Cocklebiddy, Eucla, Madura and Mundrabilla), and the Chatham Islands of New Zealand!</p>
                 <div align="center">
                     <img width="100%" style="object-fit:cover" src="../random-footer.svg" />
                 </div>
@@ -79,12 +108,46 @@
         const loc = document.getElementById('loc');
         let lat = 42.355649, lon = -71.099538, tz = "America/New_York";
         let localtime;
+        let localoff, easternoff, shift = 0;
         localtime = spacetime.now().in([lat, lon]);
+        easternoff = localtime.offset();
         tz = localtime.timezone().name;
-        loc.innerText = "MacGregor is at " + lat.toPrecision(4) + "," + lon.toPrecision(4) + " " + tz + " where it is " + localtime.time();
+        loc.innerText = "MacGregor is at " + lat.toPrecision(4) + "," + lon.toPrecision(4) + " " + tz + " where it is " + localtime.time() + " right now!";
+
+        let classarray = [];
+        let sleeparray = [];
+
+        const histtitle = document.getElementById('histtitle');
+        const hist = document.getElementById('hist');
+        const histarray = [ 425,  234,  407,  211,  265,  188,  288,  159,  256,  160,  246,
+                            149,  259,  165,  294,  224,  494,  284,  864,  548, 1127,  832,
+                           1500,  868, 1285, 1037, 1427, 1107, 1400, 1133, 1300, 1041, 1184,
+                            842, 1674, 1057, 1330, 1052, 1593, 1142, 1552,  914, 1055,  823,
+                            678,  446,  359,  753];
+        const histctx = hist.getContext('2d');
+        const histtype = document.getElementById('histtype');
+        histtype.addEventListener('change', e => {
+            if (histtype.value == 0) {
+                histtitle.innerText = "Eastern Time Histogram";
+                updateHistogram(histctx, hist, 0);
+            }
+            else {
+                histtitle.innerText = "Local Time Histogram";
+                updateHistogram(histctx, hist, shift);
+            }
+        })
+        let percent = 100;
+        
+        if (histtype.value == 0) {
+            histtitle.innerText = "Eastern Time Histogram";
+            updateHistogram(histctx, hist, 0);
+        }
+        else {
+            histtitle.innerText = "Local Time Histogram";
+            updateHistogram(histctx, hist, shift);
+        }
 
         mapimage.addEventListener('load', e => {
-            //why doesn't it always load?
             mapctx.drawImage(mapimage, 2, 3, 796, 416, 0, 0, 800, 418);
         });
         mapcanvas.addEventListener('click', event => {
@@ -105,17 +168,27 @@
             lon = (lon > 180)?lon - 360:lon;
             localtime = spacetime.now().in([lat, lon]);
             tz = localtime.timezone().name;
-            loc.innerText = lat.toPrecision(4) + "," + lon.toPrecision(4) + " " + tz + " where it is " + localtime.time();
+            localoff = localtime.offset();
+            shift = Math.round((localoff - easternoff)/30) + 48;
+            console.log(shift);
+            loc.innerText = "You're now at " + lat.toPrecision(4) + "," + lon.toPrecision(4) + " " + tz + " where it is " + localtime.time() + " right now!";
             updateClassList();
             updateSleepList();
-            updateHistogram();
+            if (histtype.value == 0) {
+                histtitle.innerText = "Eastern Time Histogram";
+                updateHistogram(histctx, hist, 0);
+            }
+            else {
+                histtitle.innerText = "Local Time Histogram";
+                updateHistogram(histctx, hist, shift);
+            }
         });
 
         const classes = document.getElementById('classes');
         const classlist = document.getElementById('classlist');
         const classstart = document.getElementById('classstart');
         const classend = document.getElementById('classend');
-        let classarray = [];
+        let dayChars = ['M', 'T', 'W', 'R', 'F', 'S', 'U'];
         function addClass(event) {
             let start = classstart.value;
             let end = classend.value;
@@ -127,8 +200,36 @@
             e = e.hour(end.split(':')[0]);
             e = e.minute(end.split(':')[1]);
             e = e.goto(tz);
-            classarray.push([start, end, s, e]);
+            let days = dayChars.map((value) => {
+                const box = document.getElementById(value + 'c');
+                // console.log(box.checked?value:'');
+                return box.checked?value:'';
+            }).reduce((prev, cur) => {
+                return prev + cur;
+            });
+            classarray.push([start, end, s, e, days]);
             updateClassList();
+            if (histtype.value == 0) {
+                histtitle.innerText = "Eastern Time Histogram";
+                updateHistogram(histctx, hist, 0);
+            }
+            else {
+                histtitle.innerText = "Local Time Histogram";
+                updateHistogram(histctx, hist, shift);
+            }
+        }
+
+        function eraseClass(i) {
+            classarray.splice(i, 1);
+            updateClassList();
+            if (histtype.value == 0) {
+                histtitle.innerText = "Eastern Time Histogram";
+                updateHistogram(histctx, hist, 0);
+            }
+            else {
+                histtitle.innerText = "Local Time Histogram";
+                updateHistogram(histctx, hist, shift);
+            }
         }
 
         function updateClassList() {
@@ -136,7 +237,11 @@
             for (let i = 0; i < classarray.length; i++) {
                 classarray[i][2] = classarray[i][2].goto(tz);
                 classarray[i][3] = classarray[i][3].goto(tz);
-                classlist.innerHTML += "<p>" + classarray[i][0] + " to " + classarray[i][1] + " Eastern is locally at <span class=\"highlight\">" + classarray[i][2].time() + " to " + classarray[i][3].time() + "</span></p>";
+                classlist.innerHTML += "<p>" + classarray[i][4] + " " +
+                    classarray[i][0] + " to " + classarray[i][1] + 
+                    " Eastern is locally at <span class=\"highlight\">" + 
+                    classarray[i][2].time() + " to " + classarray[i][3].time() + 
+                    `</span> <button onclick=\"eraseClass(${i})\">x</button></p>`;
             }
         }
 
@@ -144,7 +249,6 @@
         const sleeplist = document.getElementById('sleeplist');
         const sleepstart = document.getElementById('sleepstart');
         const sleepend = document.getElementById('sleepend');
-        let sleeparray = [];
         function addSleep(event) {
             let start = sleepstart.value;
             let end = sleepend.value;
@@ -156,8 +260,36 @@
             e = e.hour(end.split(':')[0]);
             e = e.minute(end.split(':')[1]);
             e = e.goto('America/New_York');
-            sleeparray.push([start, end, s, e]);
+            let days = dayChars.map((value) => {
+                const box = document.getElementById(value + 's');
+                // console.log(box.checked?value:'');
+                return box.checked?value:'';
+            }).reduce((prev, cur) => {
+                return prev + cur;
+            });
+            sleeparray.push([start, end, s, e, days]);
             updateSleepList();
+            if (histtype.value == 0) {
+                histtitle.innerText = "Eastern Time Histogram";
+                updateHistogram(histctx, hist, 0);
+            }
+            else {
+                histtitle.innerText = "Local Time Histogram";
+                updateHistogram(histctx, hist, shift);
+            }
+        }
+
+        function eraseSleep(i) {
+            sleeparray.splice(i, 1);
+            updateSleepList();
+            if (histtype.value == 0) {
+                histtitle.innerText = "Eastern Time Histogram";
+                updateHistogram(histctx, hist, 0);
+            }
+            else {
+                histtitle.innerText = "Local Time Histogram";
+                updateHistogram(histctx, hist, shift);
+            }
         }
 
         function updateSleepList() {
@@ -171,13 +303,87 @@
                 e = e.hour(sleeparray[i][1].split(':')[0]);
                 e = e.minute(sleeparray[i][1].split(':')[1]);
                 sleeparray[i][3] = e.goto('America/New_York');
-                sleeplist.innerHTML += "<p>" + sleeparray[i][0] + " to " + sleeparray[i][1] + " local is at <span class=\"highlight\">" + sleeparray[i][2].time() + " to " + sleeparray[i][3].time() + "</span> Eastern</p>";
+                sleeplist.innerHTML += "<p>" + sleeparray[i][4] + " " +
+                    sleeparray[i][0] + " to " + sleeparray[i][1] + 
+                    " local is at <span class=\"highlight\">" + 
+                    sleeparray[i][2].time() + " to " + sleeparray[i][3].time() + 
+                    `</span> Eastern <button onclick=\"eraseSleep(${i})\">x</button></p>`;
             }
         }
 
-        const easternhist = document.getElementById('easternhist');
-        const histctx = easternhist.getContext('2d');
-        function updateHistogram() {
+        function updateHistogram(ctx, canvas, shift) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let nom = 0;
+            let denom = 0;
+            let avail = [];
+            for (let i = 0; i < histarray.length; i++) {
+                ctx.fillStyle = '#6c5ce7';
+                ctx.fillRect(((i+shift)%48)*15, 500 - histarray[i]/4, 15, histarray[i]/4);
+                if (i%6 == 0) {
+                    // console.log((i/2 + 11)%12 + 1 + ((i >= 24)?"pm":"am"));
+                    ctx.fillStyle = '#000000';
+                    ctx.font = '16px Montserrat';
+                    ctx.fillText((i/2 + 11)%12 + 1 + ((i >= 24)?"pm":"am"), i*15, 520);
+                }
+                avail.push(['M', 'T', 'W', 'R', 'F', 'S', 'U']);
+            }
+            for (let i = 0; i < classarray.length; i++) {
+                ctx.fillStyle = `rgba(254, 220, 186, ${classarray[i][4].length/10})`;
+                let s = classarray[i][0].split(':')[0]*2 + ((classarray[i][0].split(':')[1] >= 30)?1:0);
+                let e = classarray[i][1].split(':')[0]*2 + ((classarray[i][1].split(':')[1] >= 30)?1:0);
+                s = ((s+shift)%48);
+                e = ((e+shift)%48);
+                // console.log(s + " " + e);
+                if (s > e) {
+                    ctx.fillRect(s*15, 0, (48-s)*15, 500);
+                    for (let j = s; j < 48; j++)
+                        avail[j] = avail[j].filter(value => !classarray[i][4].includes(value));
+                    for (let j = 0; j < e; j++)
+                        avail[j] = avail[j].filter(value => !classarray[i][4].includes(value));
+                    ctx.fillRect(0*15, 0, e*15, 500);
+                }
+                else {
+                    ctx.fillRect(s*15, 0, (e-s)*15, 500);
+                    for (let j = s; j < e; j++)
+                        avail[j] = avail[j].filter(value => !classarray[i][4].includes(value));
+                }
+            }
+            for (let i = 0; i < sleeparray.length; i++) {
+                ctx.fillStyle = `rgba(0, 0, 0, ${sleeparray[i][4].length/10})`;
+                let s = sleeparray[i][2].hour()*2 + ((sleeparray[i][2].minute() >= 30)?1:0);
+                let e = sleeparray[i][3].hour()*2 + ((sleeparray[i][3].minute() >= 30)?1:0);
+                s = ((s+shift)%48);
+                e = ((e+shift)%48);
+                // console.log(s + " " + e);
+                if (s > e) {
+                    ctx.fillRect(s*15, 0, (48-s)*15, 500);
+                    for (let j = s; j < 48; j++)
+                        avail[j] = avail[j].filter(value => !sleeparray[i][4].includes(value));
+                    for (let j = 0; j < e; j++)
+                        avail[j] = avail[j].filter(value => !sleeparray[i][4].includes(value));
+                    ctx.fillRect(0*15, 0, e*15, 500);
+                }
+                else {
+                    ctx.fillRect(s*15, 0, (e-s)*15, 500);
+                    for (let j = s; j < e; j++)
+                        avail[j] = avail[j].filter(value => !sleeparray[i][4].includes(value));
+                }
+            }
+
+            for (let i = 0; i < avail.length; i++) {
+                nom += avail[((i+shift)%48)].length/7*histarray[i];
+                denom += histarray[i];
+            }
+            percent = nom/denom*100;
+
+            ctx.fillStyle = '#000000';
+            ctx.fillText("You'll be available for at most", 0, 20);
+            ctx.font = '50px Montserrat';
+            ctx.fillStyle = `rgb(${(100-percent)*2}, ${percent}, 0)`;
+            ctx.fillText(percent.toPrecision(3) + "%", 0, 75);
+            ctx.fillStyle = '#000000';
+            ctx.font = '16px Montserrat';
+            ctx.fillText("of things happening", 0, 95);
         }
     </script>
 </HTML>
