@@ -158,3 +158,19 @@ a:hover {
     background-color: #2490FC80;
     transition: all var(--animation-time);
 }
+.u-gallery-image-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #00000000;
+    background-color: #2490FC00;
+    transition: all var(--animation-time);
+}
+.u-gallery-image-text:hover {
+    display: block;
+    color: #000000ff;
+    background-color: #2490FC80;
+    transition: all var(--animation-time);
+}

@@ -28,6 +28,13 @@
 	<script src="filenames.jsonp"></script>
 	<script>
 		const images = document.getElementById('images');
-		images.innerHTML = filenames.map(element => `<div align="center" class="col-4 mb-1" style="padding-left: 0; padding-right: 0;"><img style="object-fit:contain" width="99%" src="${element.name}"/></div>`).reduce((prev, cur) => prev + cur);
+		images.innerHTML = filenames.map(element =>
+			`<div align="center" class="col-4 mb-1" style="padding-left: 0; padding-right: 0;">
+				<img style="object-fit:contain" width="99%" src="${element.name}"/>
+				<div class="u-gallery-image-text">
+					<br>
+					<h2>${element.desc}</h2>
+				</div>
+			</div>`).reduce((prev, cur) => prev + cur);
 	</script>
 </HTML>
