@@ -12,24 +12,22 @@
 		<title>arun.</title>
 	</head>
 	<body class="row u-no-margin u-dark-text">
-		<div class="u-flex-grow"></div>
-		<div class="u-flex-grow" style="max-width: 1000px;">
+		<!-- <div class="u-flex-grow"></div> -->
+		<div class="u-flex-grow">
 			<div class="u-orange-back u-white-text u-thicc" align="center" width="100%" id="arun">
-                <h1><a href="../../index.html" class="u-inherit-color">arun</a> > Gallery > <a href="../2020.html" class="u-inherit-color">2020</a>.</h1>
+                <h1><a href="../../../index.html" class="u-inherit-color">arun</a> > Gallery > <a href="../2020.html" class="u-inherit-color">2020</a>.</h1>
                 <p>CNX+LPT</p>
 			</div>
-			<div id="images">
-				<div class="row u-no-margin">
-					<?php
-						$dir = __DIR__;
-						$images = glob($dir . "*.jpg", GLOB_BRACE);
-						foreach ($images as $i) {
-							printf("<div class='col-6 mb-1'><img style='object-fit:contain' width='100%' src='%s'></div>", basename($i));
-						}
-					?>
+			<div>
+				<div id="images" class="row u-no-margin">
 				</div>
 			</div>
 		</div>
-		<div class="u-flex-grow"></div>
+		<!-- <div class="u-flex-grow"></div> -->
 	</body>
+	<script src="filenames.jsonp"></script>
+	<script>
+		const images = document.getElementById('images');
+		images.innerHTML = filenames.map(element => `<div align="center" class="col-4 mb-1" style="padding-left: 0; padding-right: 0;"><img style="object-fit:contain" width="99%" src="${element.name}"/></div>`).reduce((prev, cur) => prev + cur);
+	</script>
 </HTML>
