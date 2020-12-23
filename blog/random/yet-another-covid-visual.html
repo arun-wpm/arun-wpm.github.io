@@ -1,0 +1,241 @@
+<HTML>
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+        <link rel="stylesheet" type="text/css" href="../../rayaburong.css">
+        <link rel="stylesheet" type="text/css" href="yet-another-covid-visual.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>arun.</title>
+    </head>
+    <body class="row u-no-margin u-dark-text">
+        <div class="u-flex-grow"></div>
+        <div class="u-flex-grow" style="max-width: 1000px;">
+            <div align="center" class="u-orange-back u-white-text u-thicc" width="100%" id="arun">
+                <h1><a href="../../index.html" class="u-inherit-color">arun</a> > Blog > Random.</h1>
+                <p id="title">[017] Yet Another COVID-19 Visualization</p>
+                <p>20 December, 2020</p>
+            </div>
+            <div align="center" class="u-dark-back">
+                <img width="100%" class="u-restricted-width u-center" style="object-fit:cover" src="yet-another-covid-visual.png" />
+            </div>
+            <div>
+                <h2>NOTE: THIS PAGE IS STILL UNDER CONSTRUCTION!</h2>
+                <div>
+                    <p>I planned to make some sort of visualization for a while now. It wouldn't be something innovative or never done before, but would be something for me to learn and practice some more coding. I've noticed, however, that most visualizations are either:</p>
+                    <table>
+                        <tr>
+                            <td>1. A bar graph animation, a "race" of total confirmed cases through time</td>
+                            <td>2. A map animation, a "race" of total confirmed cases through time</td>
+                            <td>3. A line graph of newly confimed cases each day through time</td>
+                        </tr>
+                    </table>
+                    <p>I want to try to majorize all of these and provide a visualization that covers all of the cases.</p>
+                    <p>Now coincidentally, Thailand saw the greatest single day increase in cases ever yesterday, where 548 cases were confirmed, linked to the seafood market in Samut Sakhon. I hope this doesn't lead to a second wave, but as we uncover new cases today in many different provinces, I'm not too positive about this. Only time can tell.</p>
+                </div>
+                <div class="u-egg-back">
+                    <h2>Methodology</h2>
+                    <p>Data is obtained from COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University (<a href="https://github.com/CSSEGISandData/COVID-19">github link</a>)</p>
+                    <p>Most of the things are written using plain javascript. The libraries used are the Leftlet.js and Chart.js libraries.</p>
+                </div>
+                <div align="center" class="u-orange-back">
+                    <div>
+                        <h3>Switch modes:</h3>
+                        <button onclick="mapMode()">Map</button>
+                        <button onclick="barMode()">Bar</button>
+                        <button onclick="lineMode()">Line</button>
+                    </div>
+                    <div id="map"></div>
+                    <canvas width="1000px" height="500px" id="bar"></canvas>
+                    <canvas width="1000px" height="500px" id="line"></canvas>
+                    <h3>Plotting:</h3>
+                    <div>
+                        <input type="radio" name="yaxis" id="ytotalcases" checked>
+                        <label for="totalcases">Total cases</label>
+                        <input type="radio" name="yaxis" id="ydailycases">
+                        <label for="dailycases">Daily new cases</label>
+                        <input type="radio" name="yaxis" id="yactivecases">
+                        <label for="activecases">Active cases</label>
+                        <input type="radio" name="yaxis" id="ytotaldeaths">
+                        <label for="totaldeaths">Total deaths</label>
+                        <input type="radio" name="yaxis" id="ydailydeaths">
+                        <label for="dailydeaths">Daily new deaths</label>
+                    </div>
+                    <h3>Plotting against:</h3>
+                    <div>
+                        <input type="radio" name="xaxis" id="xtime" checked>
+                        <label for="time">Time</label>
+                        <input type="radio" name="xaxis" id="xtotalcases">
+                        <label for="totalcases">Total cases</label>
+                        <input type="radio" name="xaxis" id="xdailycases">
+                        <label for="dailycases">Daily new cases</label>
+                        <input type="radio" name="xaxis" id="xactivecases">
+                        <label for="activecases">Active cases</label>
+                        <input type="radio" name="xaxis" id="xtotaldeaths">
+                        <label for="totaldeaths">Total deaths</label>
+                        <input type="radio" name="xaxis" id="xdailydeaths">
+                        <label for="dailydeaths">Daily new deaths</label>
+                    </div>
+                    <h3>Additional options:</h3>
+                    <div>
+                        <input type="checkbox" id="colorscale" checked>
+                        <label for="colorscale">Color Scale</label>
+                        <input type="checkbox" id="sizescale" checked>
+                        <label for="sizescale">Size Scale</label> <!-- add input for scale factor-->
+                        <input type="checkbox" id="logscale" checked>
+                        <label for="logscale">Log Scale</label>
+                        <input type="checkbox" id="logxscale">
+                        <label for="logxscale">Log X-axis Scale</label>
+                    </div>
+                    <h3>Date:</h3>
+                    <canvas width="1000px" height="50px" id="seekbar"></canvas>
+                </div>
+                <p>Disclaimer: daily new cases and daily new deaths are 7-day averages ending on the date of query</p>
+                <div align="center">
+                    <img width="100%" style="object-fit:cover" src="../random-footer.svg" />
+                </div>
+            </div>
+        </div>
+        <div class="u-flex-grow"></div>
+    </body>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+        let dataString = "";
+        let dataArray = [];
+
+        let map = L.map('map').setView([20, 0], 2);
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 10,
+            id: 'mapbox/light-v10',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'pk.eyJ1IjoiYXJ1bjkyMTY2IiwiYSI6ImNrajAyMnR4eTA1OTAyc3A4OXlkZ3I1c2UifQ.jc6YB9AJy-5gvdx5f-2wWQ'
+        }).addTo(map);
+
+        let barChartctx = document.getElementById('bar').getContext('2d');
+        let barChart = new Chart(barChartctx, {
+            type: 'horizontalBar',
+        });
+
+        let lineChartctx = document.getElementById('line').getContext('2d');
+        let lineChart = new Chart(lineChartctx, {
+            type: 'line',
+        });
+
+        let dayOfYear = undefined;
+        let sizeFactor = 2000; // todo: make this linked to the size factor input
+        let modeString = "Daily New Cases";
+
+        function processData() {
+            dataString = this.responseText;
+            dataArray = dataString.replace('Korea, South', 'South Korea') // the special cases with commas
+            .replace('Bonaire, Sint Eustatius and Saba', 'Bonaire; Sint Eustatius and Saba')
+            .split('\n')
+            .slice(1)
+            .map(element => element.split(','));
+
+            dayOfYear = dataArray[0].length + 17 // todo: make this linked to the seekbar
+
+            updateMap();
+            updateBar();
+            updateLine();
+        }
+
+        function updateMap() {
+            for (let i = 0; i < dataArray.length; i++) {
+                let row = dataArray[i];
+                let lat = row[2];
+                let lon = row[3];
+                if (lat == undefined || lon == undefined) continue;
+
+                let totalCases = row[dayOfYear - 18]; // 1/22 corresponds to 4
+                let totalCases7DaysAgo = (dayOfYear >= 25)?row[dayOfYear - 25]:0;
+                let dailyCases = (totalCases - totalCases7DaysAgo)/7;
+                let mercatorFactor = Math.pow(Math.cos(lat*Math.PI/180), -1); // doublecheck if it should be -1 or -2
+
+                let value = dailyCases; // make this reference what mode we are using
+
+                L.circle([lat, lon], {
+                    stroke: false,
+                    fillColor: '#ff0000',
+                    fillOpacity: 1.0,
+                    radius: (value == 0)?0:Math.sqrt(value)*sizeFactor/mercatorFactor // if not log: make it sqrt
+                }).addTo(map);
+                // console.log(row[1] + " " + Math.sqrt(totalCases)*sizeFactor/mercatorFactor);
+            }
+        }
+
+        function updateBar() {
+            let extractedData = [];
+            for (let i = 0; i < dataArray.length; i++) {
+                let row = dataArray[i];
+                let totalCases = row[dayOfYear - 18]; // 1/22 corresponds to 4
+                let totalCases7DaysAgo = (dayOfYear >= 25)?row[dayOfYear - 25]:0;
+                let dailyCases = (totalCases - totalCases7DaysAgo)/7;
+                extractedData.push({
+                    country: row[1],
+                    value: dailyCases // make this reference what mode we are using
+                });
+            }
+
+            // sort data by decreasing value and select top N
+            extractedData.sort((a, b) => b.value - a.value);
+            let barChartData = {
+                labels: extractedData.slice(0, 20).map(element => element.country),
+                backgroundColor: '#2490FC', // why is this not working hmm
+                borderColor: '#2490FC',
+                datasets: [{
+                    label: modeString,
+                    data: extractedData.slice(0, 20).map(element => element.value)
+                }]
+            }
+
+            barChart.data = barChartData;
+            barChart.update();
+        }
+        
+        function updateLine() {
+            let extractedData = [];
+            for (let i = 0; i < dataArray.length; i++) {
+                let row = dataArray[i];
+                let country = row[1];
+                row = row.slice(4);
+                extractedData.push({
+                    country: country,
+                    value: row.map((element, index) => {
+                        let totalCases = element;
+                        let totalCases7DaysAgo = (index >= 7)?row[index - 7]:0;
+                        let dailyCases = (totalCases - totalCases7DaysAgo)/7;
+                        return dailyCases;
+                    })
+                });
+            }
+
+            // sort data by decreasing value and select top N
+            extractedData.sort((a, b) => b.value[b.value.length - 1] - a.value[a.value.length - 1]);
+            let lineChartData = {
+                labels: extractedData[0].value.map((element, index) => "t+" + index + "d"),
+                backgroundColor: '#2490FC', // why is this not working hmm
+                borderColor: '#2490FC',
+                datasets: extractedData.slice(0, 20).map(element => {
+                    console.log(element.value);
+                    return {
+                    label: element.country,
+                    data: element.value
+                }})
+            }
+            console.log(lineChartData);
+
+            lineChart.data = lineChartData;
+            lineChart.update();
+        }
+
+        let csseReq = new XMLHttpRequest();
+        csseReq.addEventListener('load', processData);
+        csseReq.open('GET', 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv');
+        csseReq.send();
+    </script>
+</HTML>
