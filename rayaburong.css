@@ -17,6 +17,9 @@
 .u-egg-back {
     background-color: var(--egg);
 }
+.u-blue-back {
+    background-color: var(--blue);
+}
 .u-light-back {
     background-color: var(--light);
 }

@@ -1,45 +1,5 @@
 <!doctype html>
 <HTML lang="en">
-	<script>
-		// var num = 1;
-		// setInterval(cycle, 1000);
-		// function cycle()
-		// {
-		// 	document.getElementById("intro").src = "images/intro/" + num + ".jpg";
-		// 	num++;
-		// 	if (num > 5)
-		// 	{
-		// 		num = 1;
-		// 	}
-		// }
-		function growdisplay(name, full, pc) {
-			document.getElementById(name).setAttribute("style", `height:${pc*full/100}px`);
-			if (pc < 100)
-				setTimeout(growdisplay, 3, name, full, pc+1);
-		}
-		function shrinkdisplay(name, full, pc) {
-			document.getElementById(name).setAttribute("style", `height:${pc*full/100}px`);
-			if (pc > 0)
-				setTimeout(shrinkdisplay, 3, name, full, pc-1);
-			else
-			{
-				document.getElementById(name).hidden = true;
-				document.getElementById(name).setAttribute("style", `height:${full}px`);
-			}
-		}
-		function handledisplay(name) {
-			if (document.getElementById(name).hidden == true)
-			{
-				document.getElementById(name).hidden = false;
-				growdisplay(name, document.getElementById(name).clientHeight, 0);
-			}
-			else
-			{
-				let full = document.getElementById(name).clientHeight;
-				shrinkdisplay(name, full, 100);
-			}
-		}
-	</script>
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
@@ -103,97 +63,13 @@
 							<a href="profile/education.html"><p>Education</p></a>
 						</div>
 						<p align="center" class="u-gray-text">Awards</p>
-						<p align="center" class="u-gray-text">Resume (<a href="resume/Resume 20.09.19.pdf">pdf</a>)</p>
+						<p align="center" class="u-gray-text">Resume (<a href="resume/Resume 21.01.06.pdf">pdf</a>)</p>
 					</div>
 				</div>
 				<div class="u-light-back" id="body2">
 					<div class="u-index-item">
 						<h2 align="center">Projects</h2>
-						<div align="center" class="row row-cols-1 row-cols-md-3 u-no-margin">
-							<div class="col mb-1">
-								<div class="card u-gray-text u-height-100">
-									<p>MWITS Chemical Database App</p>
-									<img style="object-fit:contain" height="100px" src="projects/mwitschemical/mwitschemical.png"/>
-								</div>
-							</div>
-							<div class="col mb-1">
-								<div class="card u-gray-text u-height-100">
-									<p>Ambient Detector</p>
-									<img style="object-fit:contain" height="100px" src="projects/ambientdetector/ambientdetector.png"/>
-								</div>
-							</div>
-							<div class="col mb-1">
-								<div class="card u-gray-text u-height-100">
-									<p>Exeter Dining Hall App</p>
-									<img style="object-fit:contain" height="100px" src="projects/dininghall/dininghall.png"/>
-								</div>
-							</div>
-							<div class="col mb-1">
-								<a href="projects/recyclotron/recyclotron.html">
-									<div class="card u-link u-height-100">
-										<p>Recyclotron</p>
-										<img style="object-fit:contain" height="100px" src="projects/recyclotron/recyclotron.png"/>
-									</div>
-								</a>
-							</div>
-							<div class="col mb-1">
-								<div class="card u-gray-text u-height-100">
-									<p>CS999: Experimental Research</p>
-									<img style="object-fit:contain" height="100px" src="projects/cs999/cs999.png"/>
-								</div>
-							</div>
-							<div class="col mb-1">
-								<div class="card u-gray-text u-height-100">
-									<p>HackMIT: LectHub</p>
-									<img style="object-fit:contain" height="100px" src="projects/lecthub/lecthub.png"/>
-								</div>
-							</div>
-							<div class="col mb-1">
-								<div class="card u-gray-text u-height-100">
-									<p>21M.080: Low Resolution Spectral Modelling Synthesis</p>
-									<img style="object-fit:contain" height="100px" src="projects/spectralmodelling/spectralmodelling.png"/>
-								</div>
-							</div>
-							<div class="col mb-1">
-								<a href="projects/11s188/11s188.html">
-									<div class="card u-link u-height-100">
-										<p>11.S188: MBTA, Who Is Unreachable?</p>
-										<img style="object-fit:contain" height="100px" src="projects/11s188/11s188.png"/>
-									</div>
-								</a>
-							</div>
-							<div class="col mb-1">
-								<a href="projects/journext/journext.html">
-									<div class="card u-link u-height-100">
-										<p>web.lab: JourNext</p>
-										<img style="object-fit:contain" height="100px" src="projects/journext/journext.png"/>
-									</div>
-								</a>
-							</div>
-							<div class="col mb-1">
-								<a href="projects/itn/itn.html">
-									<div class="card u-link u-height-100">
-										<p>Improve The News</p>
-										<img style="object-fit:contain" height="100px" src="projects/itn/itn.png"/>
-									</div>
-								</a>
-							</div>
-							<div class="col mb-1">
-								<a href="projects/orthography/orthography.html">
-									<div class="card u-link u-height-100">
-										<p>Project Orthography</p>
-										<img style="object-fit:contain" height="100px" src="projects/orthography/orthography.png"/>
-									</div>
-								</a>
-							</div>
-							<div class="col mb-1">
-								<a href="projects/bangkok/bangkok.html">
-									<div class="card u-link u-height-100">
-										<p>Project Bangkok Expansion</p>
-										<img style="object-fit:contain" height="100px" src="projects/bangkok/bangkok.png"/>
-									</div>
-								</a>
-							</div>
+						<div align="center" id="projects">
 						</div>
 					</div>
 				</div>
@@ -201,6 +77,7 @@
 					<div class="u-index-item">
 						<h2 align="center">Art</h2>
 						<p align="center" class="u-link"><a href="art/design/design.html">Design Portfolio</a></p>
+						<p align="center" class="u-gray-text">Vlogs and Videos</p>
 						<p align="center" class="u-gray-text">3D Modelling and Ceramics</p>
 						<p align="center" class="u-link" onclick="handledisplay('gallery')">Photography</p>
 						<div id="gallery" align="center" hidden>
@@ -284,4 +161,55 @@
 		</div>
 		<div class="u-flex-grow"></div>
 	</body>
+	<script src="projects.jsonp"></script>
+	<script>
+		function growdisplay(name, full, pc) {
+			document.getElementById(name).setAttribute("style", `height:${pc*full/100}px`);
+			if (pc < 100)
+				setTimeout(growdisplay, 3, name, full, pc+1);
+		}
+
+		function shrinkdisplay(name, full, pc) {
+			document.getElementById(name).setAttribute("style", `height:${pc*full/100}px`);
+			if (pc > 0)
+				setTimeout(shrinkdisplay, 3, name, full, pc-1);
+			else
+			{
+				document.getElementById(name).hidden = true;
+				document.getElementById(name).setAttribute("style", `height:${full}px`);
+			}
+		}
+
+		function handledisplay(name) {
+			if (document.getElementById(name).hidden == true)
+			{
+				document.getElementById(name).hidden = false;
+				growdisplay(name, document.getElementById(name).clientHeight, 0);
+			}
+			else
+			{
+				let full = document.getElementById(name).clientHeight;
+				shrinkdisplay(name, full, 100);
+			}
+		}
+
+		const projects = document.getElementById('projects');
+		projects.innerHTML = filenames.map(element =>
+			element.topic != undefined ?
+			`<h3 align="left">${element.topic}</h3>
+			<div class="row">`
+			:
+			element.close == true ?
+			`</div>`
+			:
+			`<div class="col-3">
+				<div style="background-image: url('${element.name}'); background-size: cover; background-position: center;">
+					<div style="height: 200px;"></div>
+					<div class="u-egg-back">
+						<p>${element.desc}</p>
+					</div>
+					<a class="u-gallery-image-text" href="${element.link}"></a>
+				</div>
+			</div>`).reduce((prev, cur) => prev + cur);
+	</script>
 </HTML>

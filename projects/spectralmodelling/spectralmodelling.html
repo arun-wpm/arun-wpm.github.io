@@ -1,0 +1,57 @@
+<HTML>
+    <head>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="../../rayaburong.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>arun.</title>
+    </head>
+    <body class="row u-no-margin u-dark-text">
+        <div class="u-flex-grow"></div>
+		<div class="u-flex-grow" style="max-width: 1000px;">
+            <div align="center" class="u-orange-back u-white-text u-thicc" width="100%" id="arun">
+                <h1><a href="../../index.html" class="u-inherit-color">arun</a> > Projects.</h1>
+                <img width="200px" height="200px" class="u-center u-round" style="object-fit:cover" src="spectralmodelling.png" />
+                <h2>21M.080: Low Resolution Spectral Modelling Synthesis</h2>
+            </div>
+            <div align="center">
+                <p>code | presentation</p>
+            </div>
+            <div align="center" class="u-dark-back">
+                <img width="100%" class="u-restricted-width u-center" style="object-fit:cover" src="spectralmodelling-cover.png" />
+            </div>
+            <div>
+                <div>
+                    <h2>Who</h2>
+                    <p>This is a project made during the 21M.080 (Introduction to Music Technology) class in Fall 2019. It was a solo final project.</p>
+                </div>
+                <div class="u-egg-back">
+                    <h2>What</h2>
+                    <p>This project attempts to recreate the sound of musical instruments using a variant of short-time Fourier transform (CQT, Constant-Q Transform), a low number of sine waves and genetic algorithms.</p>
+                </div>
+                <div>
+                    <h2>Where</h2>
+                    <p>This project was done on MIT campus during the last couple weeks of the semester.</p>
+                </div>
+                <div class="u-egg-back">
+                    <h2>When</h2>
+                    <p class="highlight"><b>26 November 2020 - 12 December 2020 (2 weeks)</b></p>
+                </div>
+                <div>
+                    <h2>Why</h2>
+                    <p>It's a fun little project to demonstrate knowledge in music technology, and for myself to see how easy or difficult we can synthesize musical instrument sounds using additive synthesis. Timbre plays a huge role in our perception of sounds, as I would learn later in fall 2020 while taking 6.003. The results show that spectral modelling synthesis takes more effort than it looks. As with any genetic algorithm, the fitness function plays a significant role in how the results fare to the human ears - a "better" fitness function would make the resulting sound "better".</p>
+                </div>
+                <div class="u-egg-back">
+                    <h2>How</h2>
+                    <p>I wrote the entirety of the project in <span class="highlight">Python</span>, including the genetic algorithm parts but excluding the sound synthesis and CQT (Constant-Q Transform), which I used the librosa library.</p>
+                    <p>This is an example of the results, trying to replicate a violin sound with 1000 generations (if you dare):</p>
+                    <audio controls src="Violin.arco.ff.sulG.C4.stereo.aif"></audio>
+                    <audio controls src="ViolinC4dB_1000.wav"></audio>
+                </div>
+                <!-- replace this with proper projects footer -->
+                <img width="100%" style="object-fit:cover" src="../../blog/random-footer.svg" />
+            </div>
+        </div>
+        <div class="u-flex-grow"></div>
+    </body>
+</HTML>
