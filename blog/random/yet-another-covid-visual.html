@@ -200,7 +200,8 @@
                     temp = moment('2020-01-22');
             }
             dayMoment = temp;
-            dayOfYear = dayMoment.dayOfYear();
+            dayOfYear = dayMoment.diff(moment([2020, 0, 1]), 'days');
+            console.log(dayOfYear);
             document.getElementById('date').innerText = dayMoment.format('LL');
 
             if (!document.getElementById('map').hidden) updateMap();
