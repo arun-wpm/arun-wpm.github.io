@@ -4,7 +4,7 @@ filenames =
     {"name":"projects/itn/itn.png", "link":"projects/itn/itn.html", "desc":"Improve The News"},
     {"name":"projects/journext/journext.png", "link":"projects/journext/journext.html", "desc":"web.lab: JourNext"},
     {"name":"projects/ambientdetector/ambientdetector.png", "link":"projects/ambientdetector/ambientdetector.html", "desc":"Ambient Detector"},
-    {"name":"projects/mwitschemical/mwitschemical.png", "link":"#", "desc":"MWITS Chemical Database App"},
+    {"name":"projects/mwitschemical/mwitschemical.png", "link":"projects/mwitschemical/mwitschemical.html", "desc":"MWITS Chemical Database App"},
     {"close":true},
 
     {"topic":"Small Projects and Schoolwork"},
