@@ -1,0 +1,389 @@
+<HTML>
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="../../../rayaburong.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>arun.</title>
+    </head>
+    <body class="row u-no-margin u-dark-text">
+        <div class="u-flex-grow"></div>
+        <div class="u-flex-grow" style="max-width: 1000px;">
+            <div align="center" class="u-orange-back u-white-text u-thicc" width="100%" id="arun">
+                <h1><a href="../../../index.html" class="u-inherit-color">arun</a> > Blog > Random.</h1>
+                <p id="title">[016] Time Zones: A Visualization</p>
+                <p>10 December, 2020</p>
+            </div>
+            <div align="center" class="u-dark-back">
+                <img width="100%" class="u-restricted-width u-center" style="object-fit:cover" src="timezones.jpg" />
+            </div>
+            <div>
+                <div>
+                    <h2>Blurb</h2>
+                    <p>It's 2020. The year where everyone got to learn more about being inside more than ever, and the year where everyone had to be mindful about time zones more than ever. I have been taking classes on zoom for the better part of the year, and the experience has not been the greatest. I have talked about the unique situation that I'm in multiple times, and this visualization is an idea I have to try to quantify the weight of my situation.</p>
+                    <p>I wake up to an already finished day, with dozens of "HAPPENING NOW!" club emails that were dated, dozens of conversations between friend groups already finished, and new lectures to be watched. I walk downstairs to my parents, who insist I wake up and sleep at a more normal time, exercise more, help out with chores more, and be less of a hermit. I work on classwork in solitude, only to join some more synchronous zoom classes after dinner when those in the United States are waking up for the day I'm already close to finishing. I excuse my friends to sleep, just as they are about to start doing work.</p>
+                    <p>Read more of my rants <a href="how-i'm-doing.html">here</a>.</p>
+                    <p>Sure, I'm truly grateful that classes have gone out to accommodate those 10% of us internationals (even less so of a proportion whose time zones are unbearable like me... 1% maybe?) - but I do feel that I'm forgotten sometimes. Not always, though. There was a wave of international student appreciation posts on MIT confessions. There are still many people who check up on me during the term, making spontaneous zoom calls and such. There are also chances for me meet new people. To those experiences, and to everyone who sees us, 🧡</p>
+                </div>
+                <div class="u-egg-back">
+                    <h2>Methodology</h2>
+                    <p>The picture above (once it's up) was a render of my room at home, where I spend 70% of my fall term in. Back in spring, I took 21M.606 and one of the assignments was to draw a "set" design, of any room we are in close proximity to. I use that as a base to model after on Blender.</p>
+                    <p>The events histogram is made by first downloading all my archived emails in Outlook, writing a python script with regex matching to extract out any mention of time in emails, and tallying those times up. This is assuming most mentions of times in emails are events, deadlines or something of interest at MIT, and are in Eastern Time.</p>
+                    <p>Most of the other things are written using plain javascript. The only library used is the Spacetime library.</p>
+                </div>
+                <div align="center" class="u-orange-back">
+                    <h3>Where are you? Click on the map!</h3>
+                    <canvas width="800px" height="418px" id="map"></canvas>
+                    <p id="loc"></p>
+                    <h3>When will your classes be?</h3>
+                    <div id="classes">
+                        <label for="classstart">Start (Eastern):</label>
+                        <input type="time" id="classstart" step="1800">
+                        <label for="classend">End (Eastern):</label>
+                        <input type="time" id="classend" step="1800">
+                        <input type="checkbox" id="Mc" name="Mc">
+                        <label for="Mc">M</label>
+                        <input type="checkbox" id="Tc" name="Tc">
+                        <label for="Tc">T</label>
+                        <input type="checkbox" id="Wc" name="Wc">
+                        <label for="Wc">W</label>
+                        <input type="checkbox" id="Rc" name="Rc">
+                        <label for="Rc">R</label>
+                        <input type="checkbox" id="Fc" name="Fc">
+                        <label for="Fc">F</label>
+                        <input type="checkbox" id="Sc" name="Sc">
+                        <label for="Sc">S</label>
+                        <input type="checkbox" id="Uc" name="Uc">
+                        <label for="Uc">U</label>
+                        <button onclick="addClass()">Add</button>
+                        <div id="classlist"></div>
+                    </div>
+                    <h3>When will your sleep be?</h3>
+                    <div id="sleep">
+                        <label for="sleepstart">Start (local):</label>
+                        <input type="time" id="sleepstart" step="1800">
+                        <label for="sleepend">End (local):</label>
+                        <input type="time" id="sleepend" step="1800">
+                        <input type="checkbox" id="Ms" name="Ms">
+                        <label for="Ms">M</label>
+                        <input type="checkbox" id="Ts" name="Ts">
+                        <label for="Ts">T</label>
+                        <input type="checkbox" id="Ws" name="Ws">
+                        <label for="Ws">W</label>
+                        <input type="checkbox" id="Rs" name="Rs">
+                        <label for="Rs">R</label>
+                        <input type="checkbox" id="Fs" name="Fs">
+                        <label for="Fs">F</label>
+                        <input type="checkbox" id="Ss" name="Ss">
+                        <label for="Ss">S</label>
+                        <input type="checkbox" id="Us" name="Us">
+                        <label for="Us">U</label>
+                        <button onclick="addSleep()">Add</button>
+                        <div id="sleeplist"></div>
+                    </div>
+                    <h3 id="histtitle">Local Time Histogram</h3>
+                    <canvas width="720px" height="550px" id="hist"></canvas>
+                    <p>Customize view: Eastern <input type="range" id="histtype" min="0" max="1" value="1"> Local</p>
+                </div>
+                <p>Disclaimer: Since I set the smallest subdivision of time of email buckets and input to be 30 minutes, time zones that do not align to the hour or the half hour might trigger unexpected behavior. I might divide it further into 15 minutes later. Sorry to the people in Nepal, those five places in Australia (Border Village, Cocklebiddy, Eucla, Madura and Mundrabilla), and the Chatham Islands of New Zealand!</p>
+                <div align="center">
+                    <img width="100%" style="object-fit:cover" src="../../random-footer.svg" />
+                </div>
+            </div>
+        </div>
+        <div class="u-flex-grow"></div>
+    </body>
+    <script src="https://unpkg.com/spacetime-geo"></script>
+    <script src='https://unpkg.com/spacetime'></script>
+    <script>
+        spacetime.extend(spacetimeGeo);
+
+        const setdate = "December 10 2020";
+        const mapcanvas = document.getElementById('map');
+        const mapctx = mapcanvas.getContext('2d');
+        const mapimage = new Image();
+        mapimage.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/World_Time_Zones_Map.png/800px-World_Time_Zones_Map.png";
+
+        const loc = document.getElementById('loc');
+        let lat = 42.355649, lon = -71.099538, tz = "America/New_York";
+        let localtime;
+        let localoff, easternoff, shift = 0;
+        localtime = spacetime.now().in([lat, lon]);
+        easternoff = localtime.offset();
+        tz = localtime.timezone().name;
+        loc.innerText = "MacGregor is at " + lat.toPrecision(4) + "," + lon.toPrecision(4) + " " + tz + " where it is " + localtime.time() + " right now!";
+
+        let classarray = [];
+        let sleeparray = [];
+
+        const histtitle = document.getElementById('histtitle');
+        const hist = document.getElementById('hist');
+        const histarray = [ 425,  234,  407,  211,  265,  188,  288,  159,  256,  160,  246,
+                            149,  259,  165,  294,  224,  494,  284,  864,  548, 1127,  832,
+                           1500,  868, 1285, 1037, 1427, 1107, 1400, 1133, 1300, 1041, 1184,
+                            842, 1674, 1057, 1330, 1052, 1593, 1142, 1552,  914, 1055,  823,
+                            678,  446,  359,  753];
+        const histctx = hist.getContext('2d');
+        const histtype = document.getElementById('histtype');
+        histtype.addEventListener('change', e => {
+            if (histtype.value == 0) {
+                histtitle.innerText = "Eastern Time Histogram";
+                updateHistogram(histctx, hist, 0);
+            }
+            else {
+                histtitle.innerText = "Local Time Histogram";
+                updateHistogram(histctx, hist, shift);
+            }
+        })
+        let percent = 100;
+        
+        if (histtype.value == 0) {
+            histtitle.innerText = "Eastern Time Histogram";
+            updateHistogram(histctx, hist, 0);
+        }
+        else {
+            histtitle.innerText = "Local Time Histogram";
+            updateHistogram(histctx, hist, shift);
+        }
+
+        mapimage.addEventListener('load', e => {
+            mapctx.drawImage(mapimage, 2, 3, 796, 416, 0, 0, 800, 418);
+        });
+        mapcanvas.addEventListener('click', event => {
+            rect = mapcanvas.getBoundingClientRect();
+            //Alert: 82.5018* N = 23
+            //75* N = 60
+            //60* N = 117
+            //45* N = 162
+            //30* N = 201
+            //15* N = 236
+            // 0* N = 270
+            //15* S = 303
+            //30* S = 338
+            //45* S = 377
+            //Port Stephens: 52.0977* S = 397
+            lat = Math.cos(((event.clientY - rect.top) - 270)/192 + Math.PI/2)*85;
+            lon = ((event.clientX - rect.left) - 374)/800*360;
+            lon = (lon > 180)?lon - 360:lon;
+            localtime = spacetime.now().in([lat, lon]);
+            tz = localtime.timezone().name;
+            localoff = localtime.offset();
+            shift = Math.round((localoff - easternoff)/30) + 48;
+            console.log(shift);
+            loc.innerText = "You're now at " + lat.toPrecision(4) + "," + lon.toPrecision(4) + " " + tz + " where it is " + localtime.time() + " right now!";
+            updateClassList();
+            updateSleepList();
+            if (histtype.value == 0) {
+                histtitle.innerText = "Eastern Time Histogram";
+                updateHistogram(histctx, hist, 0);
+            }
+            else {
+                histtitle.innerText = "Local Time Histogram";
+                updateHistogram(histctx, hist, shift);
+            }
+        });
+
+        const classes = document.getElementById('classes');
+        const classlist = document.getElementById('classlist');
+        const classstart = document.getElementById('classstart');
+        const classend = document.getElementById('classend');
+        let dayChars = ['M', 'T', 'W', 'R', 'F', 'S', 'U'];
+        function addClass(event) {
+            let start = classstart.value;
+            let end = classend.value;
+            let s = new spacetime(setdate, 'America/New_York');
+            s = s.hour(start.split(':')[0]);
+            s = s.minute(start.split(':')[1]);
+            s = s.goto(tz);
+            let e = new spacetime(setdate, 'America/New_York');
+            e = e.hour(end.split(':')[0]);
+            e = e.minute(end.split(':')[1]);
+            e = e.goto(tz);
+            let days = dayChars.map((value) => {
+                const box = document.getElementById(value + 'c');
+                // console.log(box.checked?value:'');
+                return box.checked?value:'';
+            }).reduce((prev, cur) => {
+                return prev + cur;
+            });
+            classarray.push([start, end, s, e, days]);
+            updateClassList();
+            if (histtype.value == 0) {
+                histtitle.innerText = "Eastern Time Histogram";
+                updateHistogram(histctx, hist, 0);
+            }
+            else {
+                histtitle.innerText = "Local Time Histogram";
+                updateHistogram(histctx, hist, shift);
+            }
+        }
+
+        function eraseClass(i) {
+            classarray.splice(i, 1);
+            updateClassList();
+            if (histtype.value == 0) {
+                histtitle.innerText = "Eastern Time Histogram";
+                updateHistogram(histctx, hist, 0);
+            }
+            else {
+                histtitle.innerText = "Local Time Histogram";
+                updateHistogram(histctx, hist, shift);
+            }
+        }
+
+        function updateClassList() {
+            classlist.innerHTML = "";
+            for (let i = 0; i < classarray.length; i++) {
+                classarray[i][2] = classarray[i][2].goto(tz);
+                classarray[i][3] = classarray[i][3].goto(tz);
+                classlist.innerHTML += "<p>" + classarray[i][4] + " " +
+                    classarray[i][0] + " to " + classarray[i][1] + 
+                    " Eastern is locally at <span class=\"highlight\">" + 
+                    classarray[i][2].time() + " to " + classarray[i][3].time() + 
+                    `</span> <button onclick=\"eraseClass(${i})\">x</button></p>`;
+            }
+        }
+
+        const sleep = document.getElementById('sleep');
+        const sleeplist = document.getElementById('sleeplist');
+        const sleepstart = document.getElementById('sleepstart');
+        const sleepend = document.getElementById('sleepend');
+        function addSleep(event) {
+            let start = sleepstart.value;
+            let end = sleepend.value;
+            let s = new spacetime(setdate, tz);
+            s = s.hour(start.split(':')[0]);
+            s = s.minute(start.split(':')[1]);
+            s = s.goto('America/New_York');
+            let e = new spacetime(setdate, tz);
+            e = e.hour(end.split(':')[0]);
+            e = e.minute(end.split(':')[1]);
+            e = e.goto('America/New_York');
+            let days = dayChars.map((value) => {
+                const box = document.getElementById(value + 's');
+                // console.log(box.checked?value:'');
+                return box.checked?value:'';
+            }).reduce((prev, cur) => {
+                return prev + cur;
+            });
+            sleeparray.push([start, end, s, e, days]);
+            updateSleepList();
+            if (histtype.value == 0) {
+                histtitle.innerText = "Eastern Time Histogram";
+                updateHistogram(histctx, hist, 0);
+            }
+            else {
+                histtitle.innerText = "Local Time Histogram";
+                updateHistogram(histctx, hist, shift);
+            }
+        }
+
+        function eraseSleep(i) {
+            sleeparray.splice(i, 1);
+            updateSleepList();
+            if (histtype.value == 0) {
+                histtitle.innerText = "Eastern Time Histogram";
+                updateHistogram(histctx, hist, 0);
+            }
+            else {
+                histtitle.innerText = "Local Time Histogram";
+                updateHistogram(histctx, hist, shift);
+            }
+        }
+
+        function updateSleepList() {
+            sleeplist.innerHTML = "";
+            for (let i = 0; i < sleeparray.length; i++) {
+                let s = new spacetime(setdate, tz);
+                s = s.hour(sleeparray[i][0].split(':')[0]);
+                s = s.minute(sleeparray[i][0].split(':')[1]);
+                sleeparray[i][2] = s.goto('America/New_York');
+                let e = new spacetime(setdate, tz);
+                e = e.hour(sleeparray[i][1].split(':')[0]);
+                e = e.minute(sleeparray[i][1].split(':')[1]);
+                sleeparray[i][3] = e.goto('America/New_York');
+                sleeplist.innerHTML += "<p>" + sleeparray[i][4] + " " +
+                    sleeparray[i][0] + " to " + sleeparray[i][1] + 
+                    " local is at <span class=\"highlight\">" + 
+                    sleeparray[i][2].time() + " to " + sleeparray[i][3].time() + 
+                    `</span> Eastern <button onclick=\"eraseSleep(${i})\">x</button></p>`;
+            }
+        }
+
+        function updateHistogram(ctx, canvas, shift) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let nom = 0;
+            let denom = 0;
+            let avail = [];
+            for (let i = 0; i < histarray.length; i++) {
+                ctx.fillStyle = '#6c5ce7';
+                ctx.fillRect(((i+shift)%48)*15, 500 - histarray[i]/4, 15, histarray[i]/4);
+                if (i%6 == 0) {
+                    // console.log((i/2 + 11)%12 + 1 + ((i >= 24)?"pm":"am"));
+                    ctx.fillStyle = '#000000';
+                    ctx.font = '16px Montserrat';
+                    ctx.fillText((i/2 + 11)%12 + 1 + ((i >= 24)?"pm":"am"), i*15, 520);
+                }
+                avail.push(['M', 'T', 'W', 'R', 'F', 'S', 'U']);
+            }
+            for (let i = 0; i < classarray.length; i++) {
+                ctx.fillStyle = `rgba(254, 220, 186, ${classarray[i][4].length/10})`;
+                let s = classarray[i][0].split(':')[0]*2 + ((classarray[i][0].split(':')[1] >= 30)?1:0);
+                let e = classarray[i][1].split(':')[0]*2 + ((classarray[i][1].split(':')[1] >= 30)?1:0);
+                s = ((s+shift)%48);
+                e = ((e+shift)%48);
+                // console.log(s + " " + e);
+                if (s > e) {
+                    ctx.fillRect(s*15, 0, (48-s)*15, 500);
+                    for (let j = s; j < 48; j++)
+                        avail[j] = avail[j].filter(value => !classarray[i][4].includes(value));
+                    for (let j = 0; j < e; j++)
+                        avail[j] = avail[j].filter(value => !classarray[i][4].includes(value));
+                    ctx.fillRect(0*15, 0, e*15, 500);
+                }
+                else {
+                    ctx.fillRect(s*15, 0, (e-s)*15, 500);
+                    for (let j = s; j < e; j++)
+                        avail[j] = avail[j].filter(value => !classarray[i][4].includes(value));
+                }
+            }
+            for (let i = 0; i < sleeparray.length; i++) {
+                ctx.fillStyle = `rgba(0, 0, 0, ${sleeparray[i][4].length/10})`;
+                let s = sleeparray[i][2].hour()*2 + ((sleeparray[i][2].minute() >= 30)?1:0);
+                let e = sleeparray[i][3].hour()*2 + ((sleeparray[i][3].minute() >= 30)?1:0);
+                s = ((s+shift)%48);
+                e = ((e+shift)%48);
+                // console.log(s + " " + e);
+                if (s > e) {
+                    ctx.fillRect(s*15, 0, (48-s)*15, 500);
+                    for (let j = s; j < 48; j++)
+                        avail[j] = avail[j].filter(value => !sleeparray[i][4].includes(value));
+                    for (let j = 0; j < e; j++)
+                        avail[j] = avail[j].filter(value => !sleeparray[i][4].includes(value));
+                    ctx.fillRect(0*15, 0, e*15, 500);
+                }
+                else {
+                    ctx.fillRect(s*15, 0, (e-s)*15, 500);
+                    for (let j = s; j < e; j++)
+                        avail[j] = avail[j].filter(value => !sleeparray[i][4].includes(value));
+                }
+            }
+
+            for (let i = 0; i < avail.length; i++) {
+                nom += avail[((i+shift)%48)].length/7*histarray[i];
+                denom += histarray[i];
+            }
+            percent = nom/denom*100;
+
+            ctx.fillStyle = '#000000';
+            ctx.fillText("You'll be available for at most", 0, 20);
+            ctx.font = '50px Montserrat';
+            ctx.fillStyle = `rgb(${(100-percent)*2}, ${percent}, 0)`;
+            ctx.fillText(percent.toPrecision(3) + "%", 0, 75);
+            ctx.fillStyle = '#000000';
+            ctx.font = '16px Montserrat';
+            ctx.fillText("of things happening", 0, 95);
+        }
+    </script>
+</HTML>

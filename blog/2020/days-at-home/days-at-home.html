@@ -1,0 +1,151 @@
+<HTML>
+    <script src="days-at-home.jsonp"></script>
+    <script>
+        let landing = new Date('2020-03-16T10:10:00');
+        let day = 1000*60*60*24;
+        //cases since March 1, from worldometers.info, coronavirus.1point3acres.com and ma.gov
+        let UScases = [-1, 75, 100, 124, 158, 221, 319, 435, 541, 704, 994, 1301, 1630, 2183, 2770, 3613, 4596, 6346, 9296, 13865, 19497, 24345, 33745, 44056, 55222, 68673, 86061, 104804, 124256, 144321, 165053, 189967, 216622, 246729, 279183, 313379, 338779, 370019, 403521, 435518, 469124, 502876]
+        let MAcases = [-1, 1, 2, 2, 2, 3, 8, 13, 28, 41, 92, 95, 108, 123, 138, 162, 191, 218, 256, 328, 407, 523, 646, 777, 1159, 1838, 2401, 3188, 4204, 4902, 5670, 6538, 7738, 8966, 10402, 11677, 12500, 13837, 15200, 16790, 18941, 20974];
+        let THcases = [-1, 42, 43, 43, 43, 47, 48, 50, 50, 50, 53, 59, 70, 75, 82, 114, 147, 177, 212, 272, 322, 411, 599, 721, 827, 934, 1045, 1136, 1245, 1388, 1524, 1651, 1771, 1875, 1978, 2067, 2169, 2220, 2258, 2369, 2423, 2473];
+        let Globalcases = [-1, 88585, 90443, 95314, 98425, 102050, 106099, 109991, 114381, 118948, 126214, 134509, 145416, 156475, 169511, 182431, 198161, 218843, 244988, 275680, 305132, 337612, 379105, 422940, 471497, 532491, 597044, 663805, 724220, 786006, 859798, 936851, 1016948, 1118684, 1203505, 1275007, 1349051, 1434167, 1518614, 1604252, 1698881];
+        function updateTime()
+        { 
+            document.getElementById("title").innerText = `[004] ${((Date.now() - landing)/day).toFixed(6)} Days at Home`;
+            setTimeout(updateTime, 500);
+        }
+        function updateCases()
+        {
+            let infocus = 1;
+            let scroll = document.body.scrollTop + window.innerHeight*0.25;
+            let offset, lastoffset;
+            while (infocus <= 40)
+            {
+                offset = document.getElementById(`day${infocus}`).offsetTop;
+                if (offset >= scroll)
+                    break;
+                infocus++;
+                lastoffset = offset;
+            }
+            let calcUS, calcMA, calcTH, calcGlobal;
+            if (infocus == 1)
+            {
+                calcUS = Math.exp(Math.log(UScases[1]) - (offset-scroll)/100);
+                calcMA = Math.exp(Math.log(MAcases[1]) - (offset-scroll)/100);
+                calcTH = Math.exp(Math.log(THcases[1]) - (offset-scroll)/100);
+                calcGlobal = Math.exp(Math.log(Globalcases[1]) - (offset-scroll)/100);
+            }
+            else if (infocus <= 40)
+            {
+                calcUS = Math.exp(Math.log(UScases[infocus-1]) + (scroll-lastoffset)/(offset-lastoffset)*Math.log(UScases[infocus]/UScases[infocus-1]));
+                calcMA = Math.exp(Math.log(MAcases[infocus-1]) + (scroll-lastoffset)/(offset-lastoffset)*Math.log(MAcases[infocus]/MAcases[infocus-1]));
+                calcTH = Math.exp(Math.log(THcases[infocus-1]) + (scroll-lastoffset)/(offset-lastoffset)*Math.log(THcases[infocus]/THcases[infocus-1]));
+                calcGlobal = Math.exp(Math.log(Globalcases[infocus-1]) + (scroll-lastoffset)/(offset-lastoffset)*Math.log(Globalcases[infocus]/Globalcases[infocus-1]));
+            }
+            else
+            {
+                calcUS = UScases[infocus-1];
+                calcMA = MAcases[infocus-1];
+                calcTH = THcases[infocus-1];
+                calcGlobal = Globalcases[infocus-1];
+            }
+            let arrUS = document.getElementsByClassName("US");
+            let arrMA = document.getElementsByClassName("MA");
+            let arrTH = document.getElementsByClassName("TH");
+            let arrGlobal = document.getElementsByClassName("Global");
+            for (i = 0; i < arrUS.length; i++)
+            {
+                if (i+1 < infocus)
+                {
+                    arrUS[i].innerHTML = `US:<br><b>${UScases[i+1]}</b>`;
+                    arrMA[i].innerHTML = `MA:<br><b>${MAcases[i+1]}</b>`;
+                    arrTH[i].innerHTML = `TH:<br><b>${THcases[i+1]}</b>`;
+                    arrGlobal[i].innerHTML = `Global:<br><b>${Globalcases[i+1]}</b>`;
+                }
+                else if (i+1 == infocus)
+                {
+                    arrUS[i].innerHTML = `US:<br>${Math.round(calcUS)}`;
+                    arrMA[i].innerHTML = `MA:<br>${Math.round(calcMA)}`;
+                    arrTH[i].innerHTML = `TH:<br>${Math.round(calcTH)}`;
+                    arrGlobal[i].innerHTML = `Global:<br>${Math.round(calcGlobal)}`;
+                }
+                else
+                {
+                    arrUS[i].innerHTML = `US:<br>?`;
+                    arrMA[i].innerHTML = `MA:<br>?`;
+                    arrTH[i].innerHTML = `TH:<br>?`;
+                    arrGlobal[i].innerHTML = `Global:<br>?`;
+                }
+            }
+        }
+        function populate()
+        {
+            let i;
+            let text = Array(40);
+            let innerhtmls = Array(40);
+            let data = jsonstr;
+            for (i = 1; i <= 40; i++)
+            {
+                text[i] = {day:i, text:data[i-1].text};
+            }
+            innerhtmls = text.map((text) => {
+                return `<div id="day${text.day}">\
+                    <div class="row u-egg-back">\
+                        <div class="col-sm"><h2>${(text.day <= 31)?`March ${text.day}`:`April ${text.day-31}`}</h2></div>\
+                        <div class="col-sm highlight"><h3 class="u-monospace US">US:<br>?</h2></div>\
+                        <div class="col-sm u-orange-text"><h3 class="u-monospace MA">MA:<br>?</h2></div>\
+                        <div class="col-sm u-blue-text"><h3 class="u-monospace TH">TH:<br>?</h2></div>\
+                        <div class="col-sm section-break"><h3 class="u-monospace Global">Global:<br>?</h2></div>\
+                    </div>\
+                    <div>\
+                        ${text.text}\
+                    </div>\
+                </div>`
+            });
+            document.getElementById("log").innerHTML = innerhtmls.join('\n');
+        }
+    </script>
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="../../../rayaburong.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>arun.</title>
+    </head>
+    <body class="row u-no-margin u-dark-text" onload="populate();updateTime()" onscroll="updateCases()">
+        <div class="u-flex-grow"></div>
+        <div class="u-flex-grow" style="max-width: 1000px;">
+            <div align="center" class="u-orange-back u-white-text u-thicc" width="100%" id="arun">
+                <h1><a href="../../../index.html" class="u-inherit-color">arun</a> > Blog > Random.</h1>
+                <p id="title">[004] N Days at Home</p>
+                <p>10 April, 2020</p>
+            </div>
+            <div align="center" class="u-dark-back">
+                <img width="100%" class="u-restricted-width u-center" style="object-fit:cover" src="days-at-home.jpg" />
+            </div>
+            <div>
+                <p>This is a log of what I have been doing before MIT's decision to evict all undergraduates from dorms, during the hectic week of the email, and since I flew back home.</p>
+                <div id="log"></div>
+                <!-- <div id="current"></div> -->
+                <div class="u-egg-back">
+                    <p>[insert interactive javascript graph of COVID19 cases]</p>
+                </div>
+                <div>
+                    <p>Over the course of a month and a bit, it is interesting to see how my weekly schedule shifted through time. From classes in the day to at night, quarantine activities coming and going, and the daily homework schedule taking shape. Right now, I've grown accustomed to the new normal:<br>
+                        &emsp;<b>Monday</b> is 6.036 work, 24.903 lec;<br>
+                        &emsp;<b>Tuesday</b> is 6.08 work, 6.009 OH, 21M.606 class;<br>
+                        &emsp;<b>Wednesday</b> is 24.903 work, 6.004 rec, 24.903 lec;<br>
+                        &emsp;<b>Thursday</b> is 6.004 work, 6.009 OH and no class;<br>
+                        &emsp;<b>Friday</b> is 6.009 work, 6.004 rec, 6.036 lab;<br>
+                        &emsp;<b>Weekend</b> is 21M.606 work and random things.<br>
+                        It is also very surreal to see the number of COVID19 cases grow exponentially, and I consider myself lucky to have yote from the US.</p>
+                </div>
+                <div align="center">
+                    <img width="100%" style="object-fit:cover" src="days-at-home-4.jpg" />
+                    <img width="100%" style="object-fit:cover" src="../../random-footer.svg" />
+                </div>
+            </div>
+        </div>
+        <div class="u-flex-grow"></div>
+    </body>
+</HTML>

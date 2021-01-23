@@ -1,4 +1,4 @@
-filenames = 
+projects = 
 [
     {"topic":"Sizable Projects"},
     {"name":"projects/itn/itn.png", "link":"projects/itn/itn.html", "desc":"Improve The News"},

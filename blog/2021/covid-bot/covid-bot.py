@@ -6,17 +6,17 @@ import os, random
 import json
 import requests
 from datetime import date, timedelta
-import asyncio
-from bs4 import BeautifulSoup
 from keep_alive import keep_alive
+from replit import db
 
 client = discord.Client()
 
 prefix = '?'
-target_channel = None
-last_update_msg = date(2020, 1, 1)
+if ("last_updates" not in db):
+  db["last_updates"] = {}
+last_updates = db["last_updates"]
 api_url = "https://covid19.th-stat.com/api/open/"
-opendata_url = "https://opend.data.go.th/get-ckan/datastore_search?resource_id=329f684b-994d-476b-91a4-62b2ea00f29f"
+opendata_url = "https://opend.data.go.th/get-ckan/datastore_search_sql?sql=SELECT * from \"329f684b-994d-476b-91a4-62b2ea00f29f\" WHERE announce_date="
 opendata_key = os.getenv('APIKEY')
 modes = {"new", "total", "help", "random", "update_here", "detail"}
 ERROR_MSG = "นพ.ทวีศิลป์ ไม่เข้าในคำถามจากสื่อมวลชนข้อนี้ครับ"
@@ -52,7 +52,7 @@ quotes = [
 # provincial queries
 
 # basic features
-def query(channel, mode, command):
+def query(server, channel, mode, command):
     if (mode not in modes):
         return ERROR_MSG
     if (mode == "detail"):
@@ -62,8 +62,9 @@ def query(channel, mode, command):
     elif (mode == "random"):
         return quotes[random.randrange(len(quotes))]
     elif (mode == "update_here"):
-        global target_channel
-        target_channel = channel
+        if (channel.id not in last_updates):
+            last_updates[channel.id] = None
+        db["last_updates"] = last_updates
         return CHANNEL_MSG
 
     text = requests.get(api_url + "timeline").text
@@ -84,7 +85,7 @@ async def on_message(message):
         words = message.content.split(' ')
         mode = words[0][1:] # "new", "total", "detail"
         command = words[1] if len(words) > 1 else "" # "confirmed", "recovered", "hospitalized", "deaths"
-        await message.channel.send(query(message.channel, mode, command))
+        await message.channel.send(query(message.guild.id, message.channel, mode, command))
 
 emojis = {
     "ระยอง": ":game_die:",
@@ -106,31 +107,35 @@ def find_emoji(group):
 # daily updates
 @tasks.loop(minutes=5)
 async def daily_update():
-    global last_update_msg
     print("checking for daily update...")
     today = date.today()
     print(today)
-    print("target channel: " + str(target_channel))
+    print("last updates: " + str(last_updates))
 
     text = requests.get(api_url + "today").text
-    content = json.loads(text)
+    try:
+        content = json.loads(text)
+    except json.decoder.JSONDecodeError:
+        return
     latest_update = content["UpdateDate"]
-    if (today.strftime("%d/%m/%Y") in latest_update and last_update_msg < today and target_channel is not None):
+    if (today.strftime("%d/%m/%Y") in latest_update):
         print("updating!")
 
         # case by case
         session = requests.Session()
-        url = opendata_url + "&limit=" + str(content["NewConfirmed"]) + "&offset=" + str(content["Confirmed"] - content["NewConfirmed"])
+        url = opendata_url + "'" + today.isoformat() + "T00:00:00'"
         request = requests.Request('GET', url)
         prepped = request.prepare()
         prepped.headers['api-key'] = opendata_key
         cases_text = session.send(prepped).text
         cases_content = json.loads(cases_text)["result"]
+        if (len(cases_content["records"]) != content["NewConfirmed"]):
+            return
         breakdown_group = {}
         breakdown_province = {}
         for case_details in cases_content["records"]:
             group = case_details["risk"]
-            province = case_details["province_of_isolation"]
+            province = (case_details["province_of_onset"] if case_details["province_of_isolation"] == "" else case_details["province_of_isolation"])
             # print(group + " " + province)
             if (group not in breakdown_group):
                 breakdown_group[group] = {"TOTAL":0}
@@ -155,8 +160,11 @@ async def daily_update():
                 today_update += "    * " + str(breakdown_group[group][province]) + " " + province + "\n"
         today_update += "*(ข้อมูลจาก data.go.th ซึ่งไม่แยกประเภท SQ/ติดเชื้อในประเทศ/ตรวจเชิงรุก/ชายแดนประเทศ*\n"
         today_update += "*ถ้ามีเวลา ผู้พัฒนาจะพยายามหาวิธีดึงรูปจาก แถลงการ ศบค. มาเป็นรายงานลักษณะนี้)*"
-        await target_channel.send(today_update)
-        last_update_msg = today
+        for channel_id in last_updates:
+            if (last_updates[channel_id] is None or last_updates[channel_id] < today):
+                channel = client.get_channel(channel_id)
+                await channel.send(today_update)
+                last_updates[channel_id] = today
 
 @client.event
 async def on_ready():
