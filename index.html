@@ -74,31 +74,21 @@
 				</div>
 				<div class="u-egg-back" id="body3">
 					<div class="u-index-item">
-						<h2 align="center">Art</h2>
-						<p align="center" class="u-link"><a href="art/design/design.html">Design Portfolio</a></p>
-						<p align="center" class="u-gray-text">Vlogs and Videos</p>
-						<p align="center" class="u-gray-text">3D Modelling and Ceramics</p>
-						<p align="center" class="u-link" onclick="handledisplay('gallery')">Photography</p>
-						<div id="gallery" align="center" hidden>
-							<div class="card u-restricted-width overflow-auto u-height-inherit">
-								<ul class="list-group list-group-flush">
-									<li class="list-group-item"><p>< 2017</p></li>
-									<li class="list-group-item"><p>2017</p></li>
-									<li class="list-group-item"><p>2018</p></li>
-									<li class="list-group-item"><p>2019</p></li>
-									<li class="list-group-item"><a href="gallery/2020/2020.html">2020</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="u-light-back" id="body4">
-					<div class="u-index-item">
 						<h2 align="center">Blog</h2>
 						<div align="center" id="blogs"></div>
 						<p align="center">🚧: under construction</p>
 						<p align="center">👨‍💻: exhibits some coding</p>
 						<p align="center">⭐: interactive!</p>
+					</div>
+				</div>
+				<div class="u-light-back" id="body4">
+					<div class="u-index-item">
+						<h2 align="center">Art</h2>
+						<p align="center" class="u-link"><a href="art/design/design.html">Design Portfolio</a></p>
+						<p align="center" class="u-gray-text">Vlogs and Videos</p>
+						<p align="center" class="u-gray-text">3D Modelling and Ceramics</p>
+						<p align="center" class="u-link" id="PhotographyTitle" onclick="handledisplay('Photography')">▼ Photography</p>
+						<div align="center" class="row" id="Photography"></div>
 					</div>
 				</div>
 				<div class="u-dark-back u-light-text" id="body5">
@@ -114,6 +104,7 @@
 		</div>
 		<div class="u-flex-grow"></div>
 	</body>
+	<script src="photos.jsonp"></script>
 	<script src="projects.jsonp"></script>
 	<script src="blogs.jsonp"></script>
 	<script>
@@ -151,8 +142,8 @@
 			}
 		}
 
-		const sections = ['projects', 'blogs'];
-		const sources = [projects, blogs];
+		const sections = ['Photography', 'projects', 'blogs'];
+		const sources = [photos, projects, blogs];
 		const defaultopen = {
 			"Sizable Projects": true,
 			"Small Projects and Schoolwork": false,

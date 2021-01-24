@@ -1,0 +1,8 @@
+photos = 
+[
+    {"name":"gallery/pre-2017/DSC03507.JPG", "link":"gallery/pre-2017/pre-2017.html", "desc":"🚧< 2017"},
+    {"name":"gallery/2017/DSC_0968.JPG", "link":"gallery/2017/2017.html", "desc":"🚧2017"},
+    {"name":"gallery/2018/DSC_0695.JPG", "link":"gallery/2018/2018.html", "desc":"🚧2018"},
+    {"name":"gallery/2019/AWO_0101.JPG", "link":"gallery/2019/2019.html", "desc":"🚧2019"},
+    {"name":"gallery/2020/CNX+LPT/20201127-AWO_0541.jpg", "link":"gallery/2020/2020.html", "desc":"2020"},
+]
