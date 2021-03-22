@@ -63,7 +63,7 @@
 							<a href="profile/education.html"><p>Education</p></a>
 						</div>
 						<p align="center" class="u-gray-text">Awards</p>
-						<p align="center" class="u-gray-text">Resume (<a href="resume/Resume 21.01.06.pdf">pdf</a>)</p>
+						<p align="center" class="u-gray-text">Resume (<a href="resume/Resume 21.02.22.pdf">pdf</a>)</p>
 					</div>
 				</div>
 				<div class="u-light-back" id="body2">
@@ -155,7 +155,7 @@
 		sections.forEach((section, index) => {
 			document.getElementById(section).innerHTML = sources[index].map(element =>
 				(element.topic != undefined) ?
-					`<h2 align="left" class="u-link" id="${element.topic}Title" onclick="handledisplay('${element.topic}')">▼ ${element.topic}</h2>
+					`<p align="center" class="u-link" id="${element.topic}Title" onclick="handledisplay('${element.topic}')">▼ ${element.topic}</h3>
 					<div class="row" id="${element.topic}">`
 				: (element.close == true) ?
 					`</div>`

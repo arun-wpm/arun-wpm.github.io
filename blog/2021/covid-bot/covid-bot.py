@@ -13,7 +13,7 @@ client = discord.Client()
 
 prefix = '?'
 if ("last_updates" not in db):
-  db["last_updates"] = {}
+    db["last_updates"] = {} # resetting the database
 last_updates = db["last_updates"]
 api_url = "https://covid19.th-stat.com/api/open/"
 opendata_url = "https://opend.data.go.th/get-ckan/datastore_search_sql?sql=SELECT * from \"329f684b-994d-476b-91a4-62b2ea00f29f\" WHERE announce_date="
@@ -161,10 +161,11 @@ async def daily_update():
         today_update += "*(ข้อมูลจาก data.go.th ซึ่งไม่แยกประเภท SQ/ติดเชื้อในประเทศ/ตรวจเชิงรุก/ชายแดนประเทศ*\n"
         today_update += "*ถ้ามีเวลา ผู้พัฒนาจะพยายามหาวิธีดึงรูปจาก แถลงการ ศบค. มาเป็นรายงานลักษณะนี้)*"
         for channel_id in last_updates:
-            if (last_updates[channel_id] is None or last_updates[channel_id] < today):
+            if (last_updates[channel_id] is None or date.fromordinal(last_updates[channel_id]) < today):
                 channel = client.get_channel(channel_id)
                 await channel.send(today_update)
-                last_updates[channel_id] = today
+                last_updates[channel_id] = today.toordinal()
+                db["last_updates"] = last_updates
 
 @client.event
 async def on_ready():
