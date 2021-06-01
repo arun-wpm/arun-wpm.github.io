@@ -1,0 +1,44 @@
+mitedu = 
+[
+    {"topic":"Sophomore, Spring 2021"},
+    {"name":"mitedu/6033.png", "hover":"", "desc":"6.033 Computer Systems Engineering"},
+    {"name":"mitedu/6806.png", "hover":"", "desc":"6.806 Advanced Natural Language Processing"},
+    {"name":"mitedu/6819.png", "hover":"", "desc":"6.819 Advances in Computer Vision"},
+    {"name":"mitedu/24914.png", "hover":"", "desc":"24.914 Language Variation and Change"},
+    {"close":true},
+
+    {"topic":"Sophomore, IAP 2021"},
+    {"name":"mit-logo.png", "hover":"", "desc":"6.147 The Battlecode Programming Competition"},
+    {"name":"mitedu/6S089.png", "hover":"", "desc":"6.S089 Introduction to Quantum Computing 👂"},
+    {"close":true},
+
+    {"topic":"Sophomore, Fall 2020"},
+    {"name":"mitedu/6003.png", "hover":"", "desc":"6.003 Signal Processing"},
+    {"name":"mit-logo.png", "hover":"", "desc":"6.031 Elements of Software Construction"},
+    {"name":"mitedu/6815.png", "hover":"", "desc":"6.815 Digital and Computational Photography"},
+    {"name":"mitedu/18600.png", "hover":"", "desc":"18.600 Probability and Random Variables"},
+    {"name":"mitedu/24901.png", "hover":"", "desc":"24.901 Language and Its Structure I: Phonology 🌸"},
+    {"name":"mitedu/24902.png", "hover":"", "desc":"24.902 Language and Its Structure II: Syntax"},
+    {"close":true},
+
+    {"topic":"Freshman, Spring 2020"},
+    {"name":"mit-logo.png", "hover":"", "desc":"6.004 Computation Structures 🌸"},
+    {"name":"mit-logo.png", "hover":"", "desc":"6.036 Introduction to Machine Learning 🌸"},
+    {"name":"mit-logo.png", "hover":"", "desc":"6.08 Introduction to EECS via Interconnected Embedded Systems 🌸"},
+    {"name":"mit-logo.png", "hover":"", "desc":"21M.606 Introduction to Stagecraft 🌸"},
+    {"name":"mit-logo.png", "hover":"", "desc":"24.903 Language and Its Structure III: Semantics and Pragmatics 🌸"},
+    {"close":true},
+
+    {"topic":"Freshman, IAP 2020"},
+    {"name":"mit-logo.png", "hover":"", "desc":"6.148 Web Lab: A Web Programming Class and Competition"},
+    {"name":"mit-logo.png", "hover":"", "desc":"11.S188 Hack the City: Urban Data Science"},
+    {"close":true},
+
+    {"topic":"Freshman, Fall 2019"},
+    {"name":"mit-logo.png", "hover":"", "desc":"6.009 Fundamentals of Programming"},
+    {"name":"mit-logo.png", "hover":"", "desc":"6.046 Design and Analysis of Algorithms"},
+    {"name":"mit-logo.png", "hover":"", "desc":"21G.302 French II 👂"},
+    {"name":"mit-logo.png", "hover":"", "desc":"21M.080 Introduction to Music Technology"},
+    {"name":"mit-logo.png", "hover":"", "desc":"24.900 Introduction to Linguistics"},
+    {"close":true},
+]
