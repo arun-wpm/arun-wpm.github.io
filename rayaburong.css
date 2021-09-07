@@ -1,24 +1,12 @@
 :root {
-    --light: #eeeeee;
-    --gray: #888888;
-    --dark: #111111;
+    --light: #ffffff;
+    --dark: #000000;
     --orange: #FC9024;
-    --egg: #FEDCBA;
-    --blue: #2490FC;
-
-    --highlight: #6c5ce7;
-    --section-break: #555555;
 
     --animation-time: 0.5s;
 }
 .u-orange-back {
     background-color: var(--orange);
-}
-.u-egg-back {
-    background-color: var(--egg);
-}
-.u-blue-back {
-    background-color: var(--blue);
 }
 .u-light-back {
     background-color: var(--light);
@@ -30,7 +18,7 @@
     background-color: var(--dark);
 }
 .u-link {
-    color: var(--blue);
+    color: var(--orange);
     transition: all var(--animation-time);
 }
 .u-link:hover {
@@ -41,9 +29,6 @@
 .u-white-text {
     color: #ffffff;
 }
-.u-blue-text {
-    color: var(--blue);
-}
 .u-orange-text {
     color: var(--orange);
 }
@@ -53,18 +38,11 @@
 .u-dark-text {
     color: var(--dark);
 }
-.u-gray-text {
-    color: var(--gray);
-}
 .u-thicc {
     font-weight: 900;
 }
 .u-inherit-color {
     color: inherit;
-}
-.u-index-item {
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 .u-restricted-width {
     max-width: 1000px;
@@ -92,15 +70,9 @@
     border: 2.5px solid;
     border-color: var(--dark);
 }
-.highlight {
-    color: var(--highlight);
-}
 .ipa {
     color: var(--orange);
     font-family: 'Segoe UI', sans-serif;
-}
-.section-break {
-    color:var(--section-break);
 }
 .u-unit {
     flex: 1;
@@ -132,10 +104,9 @@ h3 {
 p, div {
     font-family: "Montserrat";
     font-size: 20px;
-    margin-bottom: 10px;
 }
 a {
-    color: var(--blue);
+    color: var(--orange);
     text-decoration: none;
     transition: all var(--animation-time);
 }
@@ -158,7 +129,8 @@ a:hover {
     transition: all var(--animation-time);
 }
 .u-gallery-text:hover {
-    background-color: #2490FC80;
+    border-color: var(--orange);
+    border: solid 0.1em;
     transition: all var(--animation-time);
 }
 .u-gallery-image-text {
@@ -167,13 +139,13 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    color: #00000000;
-    background-color: #2490FC00;
+    color: var(--light);
+    border: solid 0.1em;
     transition: all var(--animation-time);
 }
 .u-gallery-image-text:hover {
     display: block;
-    color: #000000ff;
-    background-color: #2490FC80;
+    color: var(--orange);
+    border: solid 0.1em;
     transition: all var(--animation-time);
 }
