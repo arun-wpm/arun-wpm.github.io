@@ -17,14 +17,16 @@
             <div align="center" class="u-orange-back u-white-text u-thicc" width="100%" id="arun">
                 <h1><a href="../index.html" class="u-inherit-color">arun</a> > Profile.</h1>
                 <p>Education</p>
-                <p>updated as of 31 May, 2021</p>
+                <p>updated as of 23 September, 2022</p>
             </div>
 
             <div class="u-light-back" id="mit">
                 <div class="u-index-item">
                     <h2 align="center">Massachusetts Institute of Technology (Cambridge, MA)</h2>
                     <p align="center">Bachelor's in Computer Science and Engineering | September 2019 - June 2023</p>
-                    <p align="center">GPAX: 5.0 / 5.0</p>
+                    <p align="center">GPAX: 4.9 / 5.0</p>
+                    <p align="center">🌸 = Pass / Fail (PE/NE or P/D/F)</p>
+                    <p align="center">👂 = Took on Listener</p>
                     <div align="center" id="mitedu"></div>
                 </div>
             </div>
@@ -89,14 +91,8 @@
 				: (element.close == true) ?
 					`</div>`
 				:
-					`<div class="col-sm-3">
-						<div style="background-image: url('${element.name}'); background-size: cover; background-repeat: no-repeat; background-position: center;">
-							<div style="height: 200px;"></div>
-							<div class="u-egg-back">
-								<p>${element.desc}</p>
-							</div>
-							<a class="u-gallery-image-text">${element.hover}</a>
-						</div>
+					`<div style="background-clip: content-box" class="u-dark-back u-light-text col-sm-3 p-1">
+						<p>${element.desc}</p>
 					</div>`
 			).reduce((prev, cur) => prev + cur);
 		});

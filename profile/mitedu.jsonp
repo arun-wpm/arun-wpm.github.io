@@ -1,5 +1,29 @@
 mitedu = 
 [
+    {"topic":"Senior, Fall 2022"},
+    {"name":"", "hover":"", "desc":"6.412 Computational Cognitive Science"},
+    {"name":"", "hover":"", "desc":"6.540 Theory of Computation"},
+    {"name":"", "hover":"", "desc":"6.842 Computational Design and Fabrication"},
+    {"name":"", "hover":"", "desc":"11.S03 Special Subject: Transportation Shaping Urbanization"},
+    {"name":"", "hover":"", "desc":"21M.380 Music and Technology"},
+    {"name":"", "hover":"", "desc":"ENGL 102M Introduction to Old English (at Harvard)"},
+    {"close":true},
+
+    {"topic":"Junior, Spring 2022"},
+    {"name":"", "hover":"", "desc":"6.345 Spoken Language Processing"},
+    {"name":"", "hover":"", "desc":"6.UAT Oral Communication"},
+    {"name":"", "hover":"", "desc":"21M.030 Introduction to World Music"},
+    {"name":"", "hover":"", "desc":"21M.603 Introduction to Design for the Theater"},
+    {"close":true},
+
+    {"topic":"Junior, Fall 2021"},
+    {"name":"", "hover":"", "desc":"6.170 Software Studio"},
+    {"name":"", "hover":"", "desc":"6.172 Software Performance Engineering 🌸"},
+    {"name":"", "hover":"", "desc":"6.837 Computer Graphics"},
+    {"name":"", "hover":"", "desc":"24.909 Field Methods in Linguistics"},
+    {"name":"", "hover":"", "desc":"21M.387 Fundamentals of Music Processing"},
+    {"close":true},
+
     {"topic":"Sophomore, Spring 2021"},
     {"name":"mitedu/6033.png", "hover":"", "desc":"6.033 Computer Systems Engineering"},
     {"name":"mitedu/6806.png", "hover":"", "desc":"6.806 Advanced Natural Language Processing"},
