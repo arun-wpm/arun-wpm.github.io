@@ -1,24 +1,8 @@
-projects = 
+peaedu = 
 [
-    {"topic":"Sizable Projects"},
-    {"name":"projects/itn/itn.png", "link":"projects/itn/itn.html", "desc":"Improve The News"},
-    {"name":"projects/journext/journext.png", "link":"projects/journext/journext.html", "desc":"web.lab: JourNext"},
-    {"name":"projects/ambientdetector/ambientdetector.png", "link":"projects/ambientdetector/ambientdetector.html", "desc":"Ambient Detector"},
-    {"name":"projects/mwitschemical/mwitschemical.png", "link":"projects/mwitschemical/mwitschemical.html", "desc":"MWITS Chemical Database App"},
-    {"close":true},
-
-    {"topic":"Small Projects and Schoolwork"},
-    {"name":"projects/11s188/11s188.png", "link":"projects/11s188/11s188.html", "desc":"11.S188: MBTA, Who Is Unreachable?"},
-    {"name":"projects/spectralmodelling/spectralmodelling.png", "link":"projects/spectralmodelling/spectralmodelling.html", "desc":"21M.080: Low Resolution Spectral Modelling Synthesis"},
-    {"name":"projects/lecthub/lecthub.png", "link":"projects/lecthub/lecthub.html", "desc":"HackMIT: LectHub"},
-    {"name":"projects/cs999/cs999.png", "link":"projects/cs999/cs999.html", "desc":"CS999: Experimental Research"},
-    {"name":"projects/recyclotron/recyclotron.png", "link":"projects/recyclotron/recyclotron.html", "desc":"Recyclotron"},
-    {"name":"projects/dininghall/dininghall.png", "link":"projects/dininghall/dininghall.html", "desc":"Exeter Dining Hall App"},
-    {"close":true},
-
-    {"topic":"Side Projects"},
-    {"name":"projects/bangkok/bangkok.png", "link":"projects/bangkok/bangkok.html", "desc":"Project Bangkok Expansion"},
-    {"name":"projects/orthography/orthography.png", "link":"projects/orthography/orthography.html", "desc":"Project Orthography"},
-    {"name":"", "link":"", "desc":"More in the works!"},
+    {"topic":"relevant subjects:"},
+    {"color":"u-6-back", "name":"", "hover":"", "desc":"CSC590 Creative Computing"},
+    {"color":"u-6-back", "name":"", "hover":"", "desc":"CSC999 Machine Learning"},
+    {"color":"", "name":"", "hover":"", "desc":"MAT610-620 Multivariable Calculus"},
     {"close":true},
 ]

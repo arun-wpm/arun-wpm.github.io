@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 		<link rel="stylesheet" type="text/css" href="../rayaburong.css">
+        <link rel="stylesheet" type="text/css" href="education.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>arun.</title>
     </head>
@@ -17,14 +18,14 @@
             <div align="center" class="u-orange-back u-white-text u-thicc" width="100%" id="arun">
                 <h1><a href="../index.html" class="u-inherit-color">arun</a> > Profile.</h1>
                 <p>Education</p>
-                <p>updated as of 23 September, 2022</p>
+                <p>updated as of 29 August, 2023</p>
             </div>
 
             <div class="u-light-back" id="mit">
                 <div class="u-index-item">
                     <h2 align="center">Massachusetts Institute of Technology (Cambridge, MA)</h2>
                     <p align="center">Bachelor's in Computer Science and Engineering | September 2019 - June 2023</p>
-                    <p align="center">GPAX: 4.9 / 5.0</p>
+                    <p align="center">GPAX: 5.0 / 5.0</p>
                     <p align="center">🌸 = Pass / Fail (PE/NE or P/D/F)</p>
                     <p align="center">👂 = Took on Listener</p>
                     <div align="center" id="mitedu"></div>
@@ -36,10 +37,6 @@
                     <p align="center">High School Diploma, Post-Graduate Year | September 2018 - June 2019</p>
                     <p align="center">GPAX: 10.6 / 11.0, Cum Laude</p>
                     <div align="center" id="peaedu"></div>
-                    <p class="card-text" align="left">relevant subjects:</p>
-                    <p class="card-text" align="left"> + CSC590: Creative Computing</p>
-                    <p class="card-text" align="left"> + CSC999: Machine Learning</p>
-                    <p class="card-text" align="left"> + MAT610-620: Multivariable Calculus</p>
                 </div>
             </div>
             <div class="u-light-back" id="mwit">
@@ -48,13 +45,6 @@
                     <p align="center">High School Diploma | May 2015 - March 2018</p>
                     <p align="center">GPAX: 4.0 / 4.0, Valedictorian</p>
                     <div align="center" id="mwitedu"></div>
-                    <p class="card-text" align="left">relevant subjects:</p>
-                    <p class="card-text" align="left"> + MATH30207: Elementary Linear Algebra</p>
-                    <p class="card-text" align="left"> + MATH30203: Introduction to Statistics</p>
-                    <p class="card-text" align="left"> + SCI30292: Science Project</p>
-                    <p class="card-text" align="left"> + TECH30202: Introduction to Microcontroller Programming</p>
-                    <p class="card-text" align="left"> + TECH30201: Object-Oriented Programming</p>
-                    <p class="card-text" align="left"> + SCI30291: Cretivity and Innovation</p>
                 </div>
             </div>
         </div>
@@ -91,7 +81,7 @@
 				: (element.close == true) ?
 					`</div>`
 				:
-					`<div style="background-clip: content-box" class="u-dark-back u-light-text col-sm-3 p-1">
+					`<div style="background-clip: content-box" class="${element.color} u-dark-back u-light-text col-sm-3 p-1">
 						<p>${element.desc}</p>
 					</div>`
 			).reduce((prev, cur) => prev + cur);

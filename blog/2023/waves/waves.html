@@ -1,0 +1,78 @@
+<HTML>
+    <head>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="../../../rayaburong.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>arun.</title>
+    </head>
+    <body class="row u-no-margin u-dark-text">
+        <div class="u-flex-grow"></div>
+        <div class="u-flex-grow" style="max-width: 1000px;">
+            <div align="center" class="u-orange-back u-white-text u-thicc" width="100%" id="arun">
+                <h1><a href="../../../index.html" class="u-inherit-color">arun</a> > Blog > 2023.</h1>
+                <p>[001] Waves</p>
+                <p>29 August, 2023</p>
+            </div>
+            <div align="center" class="u-dark-back">
+                <div class="u-margin">
+                    <img width="100%" class="u-restricted-width u-center u-light-back" style="object-fit:cover" src="Share of Thai Parliament by Election.png" />
+                </div>
+            </div>
+            <div>
+                <p class="u-gray-text" align="center"><i>Chart made in Microsoft Excel. If I am not too lazy I'll make this interactive</i></p>
+                <p>The other day I saw a poll asking the Thai general public what party they would vote for if the election were to be held right this moment. Amidst some drama of the Pheu Thai party breaking from Move Forward Party's coalition to form their own coalition with ex-military companies (breaking their own promises), a lot of people lost trust in the Pheu Thai party. In that poll, Move Forward Party was shown to sweep, which a friend of mine remarked that this hasn't happened in quite a while.</p>
+                <p>Opinions aside, I became curious. The last time this happened was when Pheu Thai swept an election a decade or so ago, but my living memory only goes back so far. What was Thai politics mathematically like during its entire existence? I found out that there doesn't seem to be one chart that shows the share of the Thai parliament by election, so I just went through a couple dozen Wikipedia pages to make one.</p>
+            </div>
+            <div class="u-egg-back">
+                <p>Turns out, Thai politics are waves. Before the Move Forward Party wave (orange, the one we're currently at the beginning of, hopefully), there was the Pheu Thai wave (red). Before that, A wave of Thai Nation Party (pink), New Aspiration Party (yellow), a wave of the Social Action Party (navy) and a wave of the Democrat Party (light blue).</p>
+                <p>It's pretty interesting to see that Thai politics are in waves. That seems pretty straightforward to explain too. Someone and their party become popular; they become the government; sitting governments become hated; rinse and repeat. Thai politics is special in that parties don't really sit well on the left-right scale, nor does it have a small number of parties to keep track of. There's more than half a hundred, constantly forming, renaming, splitting, joining and organically evolving. People switch between parties, and parties have vibes but don't necessarily fit well into the western idea of parties. In short, there's no good hash: party name and party members are good but not perfect - they change around. Party color might as well be the best hash to identify a distinct party. Oh, Thailand.</p>
+                <p>The years are in the Buddhist Era, and as you may notice, it's a mess. It isn't a regular distribution, and there are a few additional/invalidated elections. This doesn't paint the whole picture of politics either, as that involves coups and such.</p>
+                <p>This is an entirely statistical post though.</p>
+                <img width="100%" style="object-fit:cover" src="../../random-footer.svg" />
+            </div>
+        </div>
+        <div class="u-flex-grow"></div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="results.jsonp"></script>
+    <script>
+        let pieChartctx = document.getElementById('chart').getContext('2d');
+        console.log(results);
+        let keys = Object.keys(results);
+        let vals = Object.values(results);
+        console.log(keys);
+        console.log(vals);
+        let pieChart = new Chart(pieChartctx, {
+            type: 'bar',
+            data: {
+                datasets: [{
+                    label: "Occurences",
+                    data: vals,
+                    backgroundColor: keys.map(element => {
+                        console.log(element);
+                        if (element.includes("Proto") || element.includes("Lao") || element.includes("Thai")) {
+                            return '#336699';
+                        }
+                        else if (element.includes("Pali") || element.includes("Sanskrit")) {
+                            return '#339966';
+                        }
+                        else if (element.includes("Khmer")) {
+                            return '#663399';
+                        }
+                        else if (element.includes("Chinese") || element.includes("Teochew")) {
+                            return '#669933';
+                        }
+                        else if (element.includes("Cognate")) {
+                            return '#224466';
+                        }
+                        else if (element.includes("English") || element.includes("French") || element.includes("Portuguese")) {
+                            return '#993366';
+                        }
+                    })
+                }],
+                labels: keys
+            },
+        });
+    </script>
+</HTML>

@@ -32,6 +32,10 @@ blogs =
 
     {"topic":"2021"},
     {"name":"blog/2021/thaivocab/thaivocab.png", "link":"blog/2021/thaivocab/thaivocab.html", "desc":"👨‍💻1/18: Thai Vocabulary"},
-    {"name":"blog/2021/covid-bot/covid-bot-th.png", "link":"blog/2021/covid-bot/covid-bot.html", "desc":"👨‍💻1/23: COVID-19 Bot for Thailand"},
+    {"name":"blog/2021/covid-bot/covid-bot-th.png", "link":"blog/2021/covid-bot/covid-bot.html", "desc":"🚧1/23: COVID-19 Bot for Thailand"},
+    {"close":true},
+
+    {"topic":"2023"},
+    {"name":"blog/2023/waves/waves-thumbnail.png", "link":"blog/2023/waves/waves.html", "desc":"8/23: Waves"},
     {"close":true},
 ]
